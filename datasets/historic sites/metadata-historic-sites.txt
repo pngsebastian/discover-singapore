@@ -1,0 +1,45 @@
+# Metadata for Historic Sites
+---
+Identifier: '162a29f8-b4ad-4c07-995c-54797b87ccd7'
+Name: 'historic-sites'
+Title: 'Historic Sites'
+Description:
+  - 'Marked Historic Sites are places of historical significance, for e.g., important
+    event or personality are being commemorated at the site to serve as reminders
+    of our history.'
+  - ''
+  - 'It has a blue plaque / heritage marker which consists of a write-up on the history
+    of the site. They are marked by the National Heritage Board. For some of these
+    sites, the building may not be around anymore, as they are not gazetted buildings,
+    unlike national monuments.'
+Topics:
+  - 'Infrastructure'
+Keywords:
+  - 'historic sites'
+  - 'onemap'
+  - 'themes'
+Publisher:
+  Name: 'National Heritage Board'
+  Admin 1:
+    Name: 'Ong Chun Yeow'
+    Department: 'NATIONAL HERITAGE BOARD'
+    Email: 'ong_chun_yeow@nhb.gov.sg'
+Sources:
+  - 'National Heritage Board'
+Source Url: 'http://www.onemap.sg/API/Help/'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Annual'
+Last Updated: '2019-01-24T09:57:57.436704'
+Resources:
+  -
+    Identifier: '124524ac-bdaf-4faf-bd48-8d5febce16ed'
+    Title: 'Historic Sites (KML)'
+    Url: 'https://geo.data.gov.sg/historicsites/2018/12/27/kml/historicsites.kml'
+    Format: 'KML'
+    Last Updated: '2018-12-26T16:00:00'
+  -
+    Identifier: '1ae64076-89ec-45ea-a77f-a0672c195721'
+    Title: 'Historic Sites (GEOJSON)'
+    Url: 'https://geo.data.gov.sg/historicsites/2018/12/27/geojson/historicsites.geojson'
+    Format: 'GeoJSON'
+    Last Updated: '2018-12-26T16:00:00'

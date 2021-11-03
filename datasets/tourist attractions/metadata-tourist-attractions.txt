@@ -1,0 +1,36 @@
+# Metadata for Tourist Attractions
+---
+Identifier: 'dd51af3e-7900-4847-82f4-d09b1d6e164c'
+Name: 'tourist-attractions'
+Title: 'Tourist Attractions'
+Description: 'Tourist Attractions in Singapore'
+Topics:
+  - 'Infrastructure'
+Keywords:
+  - 'Tourism'
+  - 'onemap'
+  - 'themes'
+Publisher:
+  Name: 'Singapore Tourism Board'
+  Admin 1:
+    Name: 'Dione Ngo'
+    Department: 'Singapore Tourism Board'
+    Email: 'dione_ngo@stb.gov.sg'
+Sources:
+  - 'Singapore Tourism Board'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Annual'
+Last Updated: '2017-04-01T04:03:44.376786'
+Resources:
+  -
+    Identifier: '63389964-629f-42f2-a18f-4e5af0c9cb22'
+    Title: 'Tourist Attractions (KML)'
+    Url: 'https://geo.data.gov.sg/tourism/2017/01/09/kml/tourism.zip'
+    Format: 'KML'
+    Last Updated: '2017-01-08T16:00:00'
+  -
+    Identifier: 'c8b686ed-44a2-4814-82b0-e5a6691a7043'
+    Title: 'Tourist Attractions (SHP)'
+    Url: 'https://geo.data.gov.sg/tourism/2017/01/09/shp/tourism.zip'
+    Format: 'SHP'
+    Last Updated: '2017-01-08T16:00:00'
