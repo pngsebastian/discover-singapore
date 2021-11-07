@@ -1,7 +1,7 @@
 ---
 title: "DBA3702 Project"
 author: "Png Zheng Jie, Sebastian"
-date: "Last Edited: 5 Nov 2021"
+date: "Last Edited: 7 Nov 2021"
 output:
   html_document:
     toc: true
@@ -14,16 +14,202 @@ output:
 knitr::opts_chunk$set(warning = F, message = F)
 ```
 
-```{r, include=F}
-library(formatR)
-```
-
 ### Libraries
 ```{r}
-library(dplyr) # %>%
-library(rgdal) # readOGR
-library(rvest) # read_html, html_text
-library(tidyr) # separate
+library(dplyr)   # %>%
+library(leaflet)
+library(proj4)   # project
+library(rgdal)   # readOGR
+library(rvest)   # read_html, html_text
+library(tidyr)   # separate
+library(XML)
+```
+
+### [Bus Stops](https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html)
+```{r}
+# Read the data from kml file
+bus_stops <- readOGR(dsn ="./datasets/bus stops/BusStop.shp", verbose = F)
+
+# Copy data frame
+bus_stops_clean <- bus_stops@data
+
+# Add coordinates to the data frame
+bus_stops_clean[, c("LONGITUDE", "LATITUDE")] <- project(bus_stops@coords, bus_stops@proj4string@projargs, inverse = T)
+
+# Write data frame into a csv file
+write.csv(bus_stops_clean, "./datasets/bus stops/BusStop.csv")
+```
+
+### [CHAS Clinics](https://data.gov.sg/dataset/chas-clinics)
+```{r}
+# Read the data from kml file
+clinics <- readOGR(dsn ="./datasets/chas clinics/chas-clinics-kml.kml",
+                          layer = "MOH_CHAS_CLINICS", verbose = F)
+
+# Column names for data frame
+columns <- c("HCI_CODE", "HCI_NAME", "LICENCE_TYPE", "HCI_TEL", "POSTAL_CD",
+             "ADDR_TYPE", "BLK_HSE_NO", "FLOOR_NO", "UNIT_NO", "STREET_NAME",
+             "BUILDING_NAME", "CLINIC_PROGRAMME_CODE", "X_COORDINATE",
+             "Y_COORDINATE", "INC_CRC", "FMEL_UPD_D")
+
+# Collapse the column names into a string of regular expressions
+re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
+
+# Create data frame with separated columns of data
+clinics_clean <- clinics@data %>%
+    rowwise() %>%
+    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
+    separate(Description, c("To Drop", columns), re) %>%
+    select(c(3:length(.))) %>%
+    as.data.frame()
+
+# Add coordinates to the data frame
+clinics_clean[, c("LONGITUDE", "LATITUDE")] <- clinics@coords[, 1:2]
+
+# Write data frame into a csv file
+write.csv(clinics_clean, "./datasets/chas clinics/chas-clinics.csv")
+```
+
+### [Hawker Centres](https://data.gov.sg/dataset/hawker-centres)
+```{r}
+# Read the data from kml file
+hawker_centres <- readOGR(dsn ="./datasets/hawker centres/hawker-centres-kml.kml",
+                          layer = "HAWKERCENTRE", verbose = F)
+
+# Column names for data frame
+columns <- c("ADDRESSBLOCKHOUSENUMBER", "LATITUDE", "EST_ORIGINAL_COMPLETION_DATE",
+             "STATUS", "CLEANINGSTARTDATE", "ADDRESSUNITNUMBER", "ADDRESSFLOORNUMBER",
+             "NO_OF_FOOD_STALLS", "HYPERLINK", "REGION", "APPROXIMATE_GFA", "LONGITUDE",
+             "INFO_ON_CO_LOCATORS", "NO_OF_MARKET_STALLS", "AWARDED_DATE",
+             "LANDYADDRESSPOINT", "CLEANINGENDDATE", "PHOTOURL", "DESCRIPTION", "NAME",
+             "ADDRESSTYPE", "RNR_STATUS", "ADDRESSBUILDINGNAME", "HUP_COMPLETION_DATE",	
+             "LANDXADDRESSPOINT", "ADDRESSSTREETNAME", "ADDRESSPOSTALCODE", 
+             "DESCRIPTION_MYENV", "IMPLEMENTATION_DATE", "ADDRESS_MYENV", "INC_CRC",
+             "FMEL_UPD_D")
+
+# Collapse the column names into a string of regular expressions
+re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
+
+# Create data frame with separated columns of data
+hawker_centres_clean <- hawker_centres@data %>%
+    rowwise() %>%
+    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
+    separate(Description, c("To Drop", columns), re) %>%
+    select(c(3:6, 13:15, 17:18, 20:23, 25:29, 31:34)) %>%
+    as.data.frame()
+
+# Clean names of hawker centres
+hawker_centres_clean$NAME <- gsub(".+\\(|\\)", "", hawker_centres_clean$NAME)
+
+# Add coordinates to the data frame
+hawker_centres_clean[, c("LONGITUDE", "LATITUDE")] <- hawker_centres@coords[, 1:2]
+
+# Remove hawker centres under construction
+hawker_centres_clean <- hawker_centres_clean[hawker_centres_clean$STATUS != "Under Construction",]
+
+# Reset row index
+row.names(hawker_centres_clean) <- NULL
+
+# Write data frame into a csv file
+write.csv(hawker_centres_clean, "./datasets/hawker centres/hawker-centres.csv")
+```
+
+### [Historic Sites](https://data.gov.sg/dataset/historic-sites)
+```{r}
+# Read the data from kml file
+historic_sites <- readOGR(dsn = "./datasets/historic sites/historic-sites-kml.kml",
+                          layer = "HISTORICSITES", verbose = F)
+
+# Column names for data frame
+columns <- c("LANDYADDRESSPOINT", "LANDXADDRESSPOINT", "ADDRESSBLOCKHOUSENUMBER",
+             "PHOTOURL", "NAME", "HYPERLINK", "DESCRIPTION", "ADDRESSUNITNUMBER",
+             "ADDRESSTYPE", "ADDRESSSTREETNAME", "ADDRESSBUILDINGNAME", 
+             "ADDRESSPOSTALCODE", "ADDRESSFLOORNUMBER", "INC_CRC", "FMEL_UPD_D")
+
+# Collapse the column names into a string of regular expressions
+re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
+
+# Create data frame with separated columns of data
+historic_sites_clean <- historic_sites@data %>%
+    rowwise() %>%
+    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
+    separate(Description, c("To Drop", columns), re) %>%
+    select(c(3:length(.), -"ADDRESSUNITNUMBER", -"ADDRESSTYPE", -"ADDRESSFLOORNUMBER")) %>%
+    as.data.frame()
+
+# Clean URL Paths to a valid weblink
+historic_sites_clean$HYPERLINK <- 
+  sub("https://roots.sg/Roots/Content/Places/historic-sites/",  
+      "https://www.roots.gov.sg/places/places-landing/Places/historic-sites/", 
+      historic_sites_clean$HYPERLINK)
+
+historic_sites_clean$HYPERLINK[1] <- sub("adam-park-battle", "battle-at-adam-park",
+                                         historic_sites_clean$HYPERLINK[1])
+
+# Add coordinates to the data frame
+historic_sites_clean[, c("Longitude", "Latitude")] <- historic_sites@coords[, 1:2]
+
+# Write data frame into a csv file
+write.csv(historic_sites_clean, "./datasets/historic sites/historic-sites.csv")
+```
+
+### [Hotels](https://data.gov.sg/dataset/hotels)
+```{r}
+# Read the data from kml file
+hotels <- readOGR(dsn ="./datasets/hotels/hotel-locations.kml",
+                          layer = "HOTELS", verbose = F)
+
+# Column names for data frame
+columns <- c("HYPERLINK", "DESCRIPTION", "POSTALCODE", "KEEPERNAME", "TOTALROOMS",
+             "ADDRESS", "INC_CRC", "FMEL_UPD_D", "NAME")
+
+# Collapse the column names into a string of regular expressions
+re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
+
+# Create data frame with separated columns of data
+hotels_clean <- hotels@data %>%
+    rowwise() %>%
+    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
+    separate(Description, c("To Drop", columns), re) %>%
+    select(c(3, 5:length(.))) %>%
+    as.data.frame()
+
+# Add coordinates to the data frame
+hotels_clean[, c("LONGITUDE", "LATITUDE")] <- hotels@coords[, 1:2]
+
+# Rename columns
+hotels_clean <- rename(hotels_clean, EMAIL = HYPERLINK)
+
+# Reorder data frame columns
+hotels_clean <- hotels_clean[, c(8:10, 5, 2, 1, 3, 4, 6, 7)]
+
+# Write data frame into a csv file
+write.csv(hotels_clean, "./datasets/hotels/hotels.csv")
+```
+
+### [Taxi Stands](https://datamall.lta.gov.sg/content/datamall/en/static-data.html)
+```{r}
+# Read the data from kml file
+taxi_stands <- readOGR(dsn ="./datasets/taxi stands/TaxiStop.shp", verbose = F)
+
+# Copy data frame
+taxi_stands_clean <- taxi_stands@data
+
+# Add coordinates to the data frame
+taxi_stands_clean[, c("Longitude", "Latitude")] <- project(taxi_stands@coords, taxi_stands@proj4string@projargs, inverse = T)
+
+# Remove NA columns and rows
+taxi_stands_clean <- taxi_stands_clean %>% select(-1) %>% na.omit()
+
+# Rename column
+taxi_stands_clean <- rename(taxi_stands_clean, Type = TYPE_CD_DE)
+
+# Replace taxi stand type with camel case format
+taxi_stands_clean$Type <- taxi_stands_clean$Type %>% 
+  tolower() %>% gsub("(?:\\b)(\\w)", "\\U\\1", ., perl = T)
+
+# Write data frame into a csv file
+write.csv(taxi_stands_clean, "./datasets/taxi stands/TaxiStop.csv")
 ```
 
 ### [Tourist Attractions in Singapore](https://data.gov.sg/dataset/tourist-attractions)
@@ -64,158 +250,31 @@ attractions_clean <- rename(attractions_clean, Longitude = Longtitude,
                             Street = ADDRESSSTREETNAME, `Image Link` = PHOTOURL,
                             Website = HYPERLINK)
 
-# Reorder dataframe columns
+# Reorder data frame columns
 attractions_clean <- attractions_clean[, c(5, 7, 8, 13, 9, 10, 12, 1, 11, 2:4, 6, 14:17)]
 
 # Write data frame into a csv file
 write.csv(attractions_clean, "./datasets/tourist attractions/TOURISM.csv")
 ```
 
-### [Historic Sites](https://data.gov.sg/dataset/historic-sites)
+### (Train Stations)[https://datamall.lta.gov.sg/content/datamall/en/static-data.html]
 ```{r}
-# Read the data from kml file
-historic_sites <- readOGR(dsn = "./datasets/historic sites/historic-sites-kml.kml",
-                          layer = "HISTORICSITES", verbose = F)
+# Read the data from shp file
+stations <- readOGR(dsn = "./datasets/train stations/MRTLRTStnPtt.shp", verbose = F)
 
-# Column names for data frame
-columns <- c("LANDYADDRESSPOINT", "LANDXADDRESSPOINT", "ADDRESSBLOCKHOUSENUMBER",
-             "PHOTOURL", "NAME", "HYPERLINK", "DESCRIPTION", "ADDRESSUNITNUMBER",
-             "ADDRESSTYPE", "ADDRESSSTREETNAME", "ADDRESSBUILDINGNAME", 
-             "ADDRESSPOSTALCODE", "ADDRESSFLOORNUMBER", "INC_CRC", "FMEL_UPD_D")
+# Dropping object id column
+stations_clean <- stations@data[,-1]
 
-# Collapse the column names into a string of regular expressions
-re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
+# Add coordinates to the data frame
+stations_clean[, c("LONGITUDE", "LATITUDE")] <- project(stations@coords, stations@proj4string@projargs, inverse = T)
 
-# Create data frame with separated columns of data
-historic_sites_clean <- historic_sites@data %>%
-    rowwise() %>%
-    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
-    separate(Description, c("To Drop", columns), re) %>%
-    select(c(3:length(.), -"ADDRESSUNITNUMBER", -"ADDRESSTYPE", -"ADDRESSFLOORNUMBER")) %>%
-    as.data.frame()
-
-# Clean URL Paths to a valid weblink
-historic_sites_clean$HYPERLINK <- 
-  sub("https://roots.sg/Roots/Content/Places/historic-sites/",  
-      "https://www.roots.gov.sg/places/places-landing/Places/historic-sites/", 
-      historic_sites_clean$HYPERLINK)
-
-historic_sites_clean$HYPERLINK[1] <- sub("adam-park-battle", "battle-at-adam-park",
-                                         historic_sites_clean$HYPERLINK[1])
-
-# Add coordinates to the dataframe
-historic_sites_clean[, c("Longitude", "Latitude")] <- historic_sites@coords[, 1:2]
+# Replace station names with camel case format
+stations_clean$STN_NAME <- stations_clean$STN_NAME %>% 
+  gsub("(?:\\b)(?!MRT)(?!LRT)(\\w+)", "\\L\\1", ., perl = T) %>% 
+  gsub("(?:\\b)(\\w)", "\\U\\1", ., perl = T)
 
 # Write data frame into a csv file
-write.csv(historic_sites_clean, "./datasets/historic sites/historic-sites.csv")
-```
-
-### [Hawker Centres](https://data.gov.sg/dataset/hawker-centres)
-```{r}
-# Read the data from kml file
-hawker_centres <- readOGR(dsn ="./datasets/hawker centres/hawker-centres-kml.kml",
-                          layer = "HAWKERCENTRE", verbose = F)
-
-# Column names for data frame
-columns <- c("ADDRESSBLOCKHOUSENUMBER", "LATITUDE", "EST_ORIGINAL_COMPLETION_DATE",
-             "STATUS", "CLEANINGSTARTDATE", "ADDRESSUNITNUMBER", "ADDRESSFLOORNUMBER",
-             "NO_OF_FOOD_STALLS", "HYPERLINK", "REGION", "APPROXIMATE_GFA", "LONGITUDE",
-             "INFO_ON_CO_LOCATORS", "NO_OF_MARKET_STALLS", "AWARDED_DATE",
-             "LANDYADDRESSPOINT", "CLEANINGENDDATE", "PHOTOURL", "DESCRIPTION", "NAME",
-             "ADDRESSTYPE", "RNR_STATUS", "ADDRESSBUILDINGNAME", "HUP_COMPLETION_DATE",	
-             "LANDXADDRESSPOINT", "ADDRESSSTREETNAME", "ADDRESSPOSTALCODE", 
-             "DESCRIPTION_MYENV", "IMPLEMENTATION_DATE", "ADDRESS_MYENV", "INC_CRC",
-             "FMEL_UPD_D")
-
-# Collapse the column names into a string of regular expressions
-re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
-
-# Create data frame with separated columns of data
-hawker_centres_clean <- hawker_centres@data %>%
-    rowwise() %>%
-    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
-    separate(Description, c("To Drop", columns), re) %>%
-    select(c(3:6, 13:15, 17:18, 20:23, 25:29, 31:34)) %>%
-    as.data.frame()
-
-# Clean names of hawker centres
-hawker_centres_clean$NAME <- gsub(".+\\(|\\)", "", hawker_centres_clean$NAME)
-
-# Add coordinates to the dataframe
-hawker_centres_clean[, c("LONGITUDE", "LATITUDE")] <- hawker_centres@coords[, 1:2]
-
-# Remove hawker centres under construction
-hawker_centres_clean <- hawker_centres_clean[hawker_centres_clean$STATUS != "Under Construction",]
-
-# Reset row index
-row.names(hawker_centres_clean) <- NULL
-
-# Write data frame into a csv file
-write.csv(hawker_centres_clean, "./datasets/hawker centres/hawker-centres.csv")
-```
-
-### [Hotels](https://data.gov.sg/dataset/hotels)
-```{r}
-# Read the data from kml file
-hotels <- readOGR(dsn ="./datasets/hotels/hotel-locations.kml",
-                          layer = "HOTELS", verbose = F)
-
-# Column names for data frame
-columns <- c("HYPERLINK", "DESCRIPTION", "POSTALCODE", "KEEPERNAME", "TOTALROOMS",
-             "ADDRESS", "INC_CRC", "FMEL_UPD_D", "NAME")
-
-# Collapse the column names into a string of regular expressions
-re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
-
-# Create data frame with separated columns of data
-hotels_clean <- hotels@data %>%
-    rowwise() %>%
-    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
-    separate(Description, c("To Drop", columns), re) %>%
-    select(c(3, 5:length(.))) %>%
-    as.data.frame()
-
-# Add coordinates to the dataframe
-hotels_clean[, c("LONGITUDE", "LATITUDE")] <- hotels@coords[, 1:2]
-
-# Rename columns
-hotels_clean <- rename(hotels_clean, EMAIL = HYPERLINK)
-
-# Reorder dataframe columns
-hotels_clean <- hotels_clean[, c(8:10, 5, 2, 1, 3, 4, 6, 7)]
-
-# Write data frame into a csv file
-write.csv(hotels_clean, "./datasets/hotels/hotels.csv")
-```
-
-### [CHAS Clinics](https://data.gov.sg/dataset/chas-clinics)
-```{r}
-# Read the data from kml file
-clinics <- readOGR(dsn ="./datasets/chas clinics/chas-clinics-kml.kml",
-                          layer = "MOH_CHAS_CLINICS", verbose = F)
-
-# Column names for data frame
-columns <- c("HCI_CODE", "HCI_NAME", "LICENCE_TYPE", "HCI_TEL", "POSTAL_CD",
-             "ADDR_TYPE", "BLK_HSE_NO", "FLOOR_NO", "UNIT_NO", "STREET_NAME",
-             "BUILDING_NAME", "CLINIC_PROGRAMME_CODE", "X_COORDINATE",
-             "Y_COORDINATE", "INC_CRC", "FMEL_UPD_D")
-
-# Collapse the column names into a string of regular expressions
-re <- paste0("(.+", paste0(columns, "\\s)", collapse = "|(\\s"))
-
-# Create data frame with separated columns of data
-clinics_clean <- clinics@data %>%
-    rowwise() %>%
-    mutate(Description = trimws(html_text(read_html(charToRaw(Description))))) %>%
-    separate(Description, c("To Drop", columns), re) %>%
-    select(c(3:length(.))) %>%
-    as.data.frame()
-
-# Add coordinates to the dataframe
-clinics_clean[, c("LONGITUDE", "LATITUDE")] <- clinics@coords[, 1:2]
-
-# Write data frame into a csv file
-write.csv(clinics_clean, "./datasets/chas clinics/chas-clinics.csv")
+write.csv(stations_clean, "./datasets/train stations/MRTLRTstations.csv")
 ```
 
 [Back to top](#){style="float:right; margin:10px 0px 35px"}<br>
