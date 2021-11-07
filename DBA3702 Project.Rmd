@@ -1,7 +1,7 @@
 ---
 title: "DBA3702 Project"
 author: "Png Zheng Jie, Sebastian"
-date: "Last Edited: 7 Nov 2021"
+date: "Last Edited: 5 Nov 2021"
 output:
   html_document:
     toc: true
@@ -17,12 +17,14 @@ knitr::opts_chunk$set(warning = F, message = F)
 ### Libraries
 ```{r}
 library(dplyr)   # %>%
+library(ggmap)   # geocode
 library(leaflet)
 library(proj4)   # project
 library(rgdal)   # readOGR
 library(rvest)   # read_html, html_text
 library(tidyr)   # separate
-library(XML)
+
+#register_google(key = 'Insert api key here')
 ```
 
 ### [Bus Stops](https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html)
@@ -63,12 +65,34 @@ clinics_clean <- clinics@data %>%
     select(c(3:length(.))) %>%
     as.data.frame()
 
-# Add coordinates to the data frame
-clinics_clean[, c("LONGITUDE", "LATITUDE")] <- clinics@coords[, 1:2]
+# Remove # from floor number
+clinics_clean$FLOOR_NO <- sub("#", "", clinics_clean$FLOOR_NO)
+
+# Add coordinates to the data frame 
+# clinics@coords[, 1:2] is not used as there are several inaccuracies in coordinates
+clinics_clean[, c("LONGITUDE", "LATITUDE")] <- with(clinics_clean,  
+  geocode(location = paste(BLK_HSE_NO, STREET_NAME, ", Singapore,", POSTAL_CD), 
+          output = "latlon", source = "google"))
+
+# Add address of clinics
+clinics_clean$ADDRESS <- with(clinics_clean, 
+                              paste0(BLK_HSE_NO, " ", STREET_NAME,
+                                     ifelse(FLOOR_NO != "", paste0(", #", FLOOR_NO), ""), 
+                                     ifelse(UNIT_NO != "", paste0("-", UNIT_NO), ""), ", ", 
+                                     "Singapore ", POSTAL_CD)) %>% 
+                          gsub("(?:\\b)(\\w+)", "\\L\\1", ., perl = T) %>% 
+                          gsub("(?:\\b)(\\w)", "\\U\\1", ., perl = T)
 
 # Write data frame into a csv file
 write.csv(clinics_clean, "./datasets/chas clinics/chas-clinics.csv")
 ```
+
+```{r}
+#clinics_clean[clinics_clean$HCI_NAME == "NEWLIFE FAMILY CLINIC & SURGERY",]
+with(clinics_clean[clinics_clean$HCI_NAME == "NEWLIFE FAMILY CLINIC & SURGERY",],  
+ geocode(location = paste(BLK_HSE_NO, STREET_NAME, ", Singapore,", POSTAL_CD), output = "latlon", source = "google"))
+```
+
 
 ### [Hawker Centres](https://data.gov.sg/dataset/hawker-centres)
 ```{r}
@@ -147,7 +171,7 @@ historic_sites_clean$HYPERLINK[1] <- sub("adam-park-battle", "battle-at-adam-par
                                          historic_sites_clean$HYPERLINK[1])
 
 # Add coordinates to the data frame
-historic_sites_clean[, c("Longitude", "Latitude")] <- historic_sites@coords[, 1:2]
+historic_sites_clean[, c("LONGITUDE", "LATITUDE")] <- historic_sites@coords[, 1:2]
 
 # Write data frame into a csv file
 write.csv(historic_sites_clean, "./datasets/historic sites/historic-sites.csv")
