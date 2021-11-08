@@ -1,7 +1,7 @@
 ---
 title: "DBA3702 Project"
 author: "Png Zheng Jie, Sebastian"
-date: "Last Edited: 5 Nov 2021"
+date: "Last Edited: 8 Nov 2021"
 output:
   html_document:
     toc: true
@@ -16,13 +16,13 @@ knitr::opts_chunk$set(warning = F, message = F)
 
 ### Libraries
 ```{r}
-library(dplyr)   # %>%
-library(ggmap)   # geocode
+library(dplyr)     # %>%
+library(ggmap)     # geocode
 library(leaflet)
-library(proj4)   # project
-library(rgdal)   # readOGR
-library(rvest)   # read_html, html_text
-library(tidyr)   # separate
+library(proj4)     # project
+library(rgdal)     # readOGR
+library(rvest)     # read_html, html_text
+library(tidyr)     # separate
 
 #register_google(key = 'Insert api key here')
 ```
@@ -86,13 +86,6 @@ clinics_clean$ADDRESS <- with(clinics_clean,
 # Write data frame into a csv file
 write.csv(clinics_clean, "./datasets/chas clinics/chas-clinics.csv")
 ```
-
-```{r}
-#clinics_clean[clinics_clean$HCI_NAME == "NEWLIFE FAMILY CLINIC & SURGERY",]
-with(clinics_clean[clinics_clean$HCI_NAME == "NEWLIFE FAMILY CLINIC & SURGERY",],  
- geocode(location = paste(BLK_HSE_NO, STREET_NAME, ", Singapore,", POSTAL_CD), output = "latlon", source = "google"))
-```
-
 
 ### [Hawker Centres](https://data.gov.sg/dataset/hawker-centres)
 ```{r}
@@ -267,6 +260,10 @@ attractions_clean[attractions_clean == "<Null>"] <- ""
 
 # Remove duplicated attractions
 attractions_clean <- attractions_clean[!duplicated(attractions_clean$NAME), ]
+
+# Clean names of attractions
+attractions_clean$NAME <- gsub("(?<=[a-z])(:|,|\\s*\\-|\\s+in)\\s+.+", "", 
+                               attractions_clean$NAME, perl = T)
 
 # Rename columns
 attractions_clean <- rename(attractions_clean, Longitude = Longtitude, 
