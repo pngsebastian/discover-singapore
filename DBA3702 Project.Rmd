@@ -264,6 +264,9 @@ attractions_clean[attractions_clean == "<Null>"] <- ""
 # Remove duplicated attractions
 attractions_clean <- attractions_clean[!duplicated(attractions_clean$NAME), ]
 
+# Reset row index
+row.names(attractions_clean) <- NULL
+
 # Clean names of attractions
 attractions_clean$NAME <- gsub("(?<=[a-z])(:|,|\\s*\\-|\\s+in)\\s+.+", "", 
                                attractions_clean$NAME, perl = T)
