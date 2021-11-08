@@ -253,7 +253,10 @@ attractions_clean <- attractions@data %>%
   as.data.frame()
 
 # Clean URL Paths to a valid weblink
-attractions_clean$`URL Path` <- sub("/en", "", attractions_clean$`URL Path`)
+attractions_clean$`URL Path` <- attractions_clean$`URL Path` %>% 
+  gsub(pattern = "((?<=\\.com)/en)|(\\.html)", replacement = "", perl = T) %>%
+  sub(pattern = "yoursingapore", replacement = "visitsingapore") %>%
+  paste0("https://", .)
 
 # Replace <Null> strings with an empty string
 attractions_clean[attractions_clean == "<Null>"] <- ""
