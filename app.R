@@ -8,12 +8,18 @@ ui <- dashboardPage(
   
   dashboardSidebar(
     sidebarMenu(
+      menuItem(text = "App Guide", tabName = "guide", icon = icon("info")),
       menuItem(text = "Map View", tabName = "mapview", icon = icon("map")),
-      menuItem(text = "Explore Twitter", tabName = "twitter", icon = icon("twitter"))
+      menuItem(text = "Tripadvisor Reviews", tabName = "tripadvisor", icon = icon("binoculars"))
     )
   ),
   
   dashboardBody(
+    tabItem(tabName = "guide"
+      # Application Guide
+      
+    ),
+    
     tabItems(
       # Map view tab
       tabItem(tabName = "mapview",
@@ -41,13 +47,13 @@ ui <- dashboardPage(
           ),
         
           mainPanel(
-            leafletOutput(outputId = "plotLocations"),
+            leafletOutput(outputId = "map"),
           )
         ),
         
         fluidRow(
-          column(6, offset = 0, style = "padding: 20px;", uiOutput(outputId = "information")),
-          column(6, )
+          column(8, offset = 0, style = "padding: 20px;", uiOutput(outputId = "information")),
+          column(4, )
         )
       ),
       
@@ -82,8 +88,8 @@ server <- function(input, output){
                                markerColor = "darkblue", iconColor = "#FFFFFF"),
     hospital = makeAwesomeIcon(icon = "h-square", library = "fa",
                                markerColor = "red", iconColor = "#FFFFFF"),
-    hotels = makeAwesomeIcon(icon = "concierge-bell", library = "fa", 
-                             markerColor = "green", iconColor = "#FFFFFF"),
+    hotels = makeAwesomeIcon(icon = "hotel", library = "fa", 
+                             markerColor = "darkgreen", iconColor = "#FFFFFF"),
     station = makeAwesomeIcon(icon = "subway", library = "fa", 
                               markerColor = "black", iconColor = "#FFFFFF"),
     taxi = makeAwesomeIcon(icon = "taxi", library = "fa", 
@@ -92,82 +98,91 @@ server <- function(input, output){
                               markerColor = "blue", iconColor = "#FFFFFF")
   )
   
-  plotLocations <- function(viewOption) {
-    # Set map view to Singapore's coordinates
-    m <- leaflet() %>% setView(lng = 103.8198, lat = 1.3521, zoom = 11) %>% addTiles()
-
+  plotLocations <- function(viewOption, m) {
     # Bus Stops
     if (1 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = busstops, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["busstop"], 
+                                   layerId = ~paste0("1-", X), group = 1, icon = ~map_icons["busstop"], 
                                    popup = ~LOC_DESC, clusterOptions = markerClusterOptions())
     }
     
     # MRT/LRT Stations
     if (2 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = stations, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["station"], 
+                                   layerId = ~paste0("2-", X), group = 2, icon = ~map_icons["station"], 
                                    popup = ~STN_NAME, clusterOptions = markerClusterOptions())
     }
     
     # Taxi Stands
     if (3 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = taxi_stands, lng = ~Longitude, lat = ~Latitude, 
-                                   layerId = ~paste0(viewOption, "-", X),icon = ~map_icons["taxi"], 
+                                   layerId = ~paste0("3-", X), group = 3, icon = ~map_icons["taxi"], 
                                    popup = ~Type, clusterOptions = markerClusterOptions())
     }
     
     # Clinics
     if (4 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = clinics, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["clinic"], 
+                                   layerId = ~paste0("4-", X), group = 4, icon = ~map_icons["clinic"], 
                                    popup = ~HCI_NAME, clusterOptions = markerClusterOptions())
     }
     
     # Hospitals
     if (5 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = hospitals, lng = ~lon, lat = ~lat, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["hospital"], 
+                                   layerId = ~paste0("5-", X), group = 5, icon = ~map_icons["hospital"], 
                                    popup = ~Name, clusterOptions = markerClusterOptions())
     }
     
     # Hawker Centres
     if (6 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = hawker_centres, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["hawker"], 
+                                   layerId = ~paste0("6-", X), group = 6, icon = ~map_icons["hawker"], 
                                    popup = ~NAME, clusterOptions = markerClusterOptions())
     }
     
     # Historic Sites
     if (7 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = historic_sites, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["historic"], 
+                                   layerId = ~paste0("7-", X), group = 7, icon = ~map_icons["historic"], 
                                    popup = ~NAME, clusterOptions = markerClusterOptions())
     }
     
     # Hotels
     if (8 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = hotels, lng = ~LONGITUDE, lat = ~LATITUDE, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["hotel"], 
+                                   layerId = ~paste0("8-", X), group = 8, icon = ~map_icons["hotels"], 
                                    popup = ~NAME, clusterOptions = markerClusterOptions())
     }
     
     # Travel Attractions
     if (9 %in% viewOption) {
       m <- m %>% addAwesomeMarkers(data = attractions, lng = ~Longitude, lat = ~Latitude, 
-                                   layerId = ~paste0(viewOption, "-", X), icon = ~map_icons["tourist"], 
+                                   layerId = ~paste0("9-", X), group = 9, icon = ~map_icons["tourist"], 
                                    popup = ~NAME, clusterOptions = markerClusterOptions())
     }
     
     m
   }
   
-  output$plotLocations <- renderLeaflet({
-    plotLocations(c(input$transportOptions, input$medicalOptions, input$touristOptions))
+  output$map <- renderLeaflet({
+    # Set map view to Singapore's coordinates
+    leaflet() %>% addTiles() %>% setView(lng = 103.8198, lat = 1.3521, zoom = 11)
+    
   })
   
-  observeEvent(input$plotLocations_marker_click, {
-    ref <- unlist(strsplit(input$plotLocations_marker_click[[1]], split = "-"))
+  # Retains zoom view of map when user selects additional options
+  observe({
+    proxy <- leafletProxy("map")
+    viewOptions <- c(input$transportOptions, input$medicalOptions, input$touristOptions)
+    
+    #for (view in which(!(1:9 %in% as.numeric(ViewOptions)))) {
+    proxy %>% clearMarkerClusters() %>% plotLocations(viewOptions, .)
+  })
+  
+  # Observes the leaflet marker that the user clicks on
+  observeEvent(input$map_marker_click, {
+    ref <- unlist(strsplit(input$map_marker_click[[1]], split = "-"))
     data_index <- as.numeric(ref[1])
     row_index <- as.numeric(ref[2])
     
@@ -178,6 +193,7 @@ server <- function(input, output){
     # Retrieve row in selected data frame
     selected_row <- data[[data_index]][row_index, ]
     
+    # Displays information regarding the selected marker
     output$information <- renderUI({
       h3("Full Information")
       switch(data_index,
@@ -244,7 +260,7 @@ server <- function(input, output){
           )
         },
         hotel = {
-          # Case when a taxi stand is selected
+          # Case when a hotel is selected
           p(strong("Name: "), selected_row[2], br(),
             strong("Total rooms: "), selected_row[9], br(),
             strong("Email: "), selected_row[7], br(),
