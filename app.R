@@ -1,7 +1,21 @@
 # Libraries
+library(dplyr)
 library(leaflet)
+library(osrm)
 library(shiny)
 library(shinydashboard)
+
+# Load data
+attractions <- read.csv("./datasets/tourist attractions/TOURISM.csv", stringsAsFactors = F)
+busstops <- read.csv("./datasets/bus stops/BusStop.csv", stringsAsFactors = F)
+clinics <- read.csv("./datasets/chas clinics/chas-clinics.csv", stringsAsFactors = F)
+hawker_centres <- read.csv("./datasets/hawker centres/hawker-centres.csv", stringsAsFactors = F)
+historic_sites <- read.csv("./datasets/historic sites/historic-sites.csv", stringsAsFactors = F)
+hospitals <- read.csv("./datasets/hospitals/hospital_data.csv", stringsAsFactors = F)
+hotels <- read.csv("./datasets/hotels/hotels.csv", stringsAsFactors = F)
+stations <- read.csv("./datasets/train stations/MRTLRTstations.csv", stringsAsFactors = F)
+taxi_stands <- read.csv("./datasets/taxi stands/TaxiStop.csv", stringsAsFactors = F)
+combined_data <- read.csv("./datasets/combined_data.csv", stringsAsFactors = F)
 
 ui <- dashboardPage(
   dashboardHeader(title = "Discover Singapore"),
@@ -26,6 +40,9 @@ ui <- dashboardPage(
         sidebarLayout(
           position = "right",
           sidebarPanel(
+            uiOutput(
+              outputId = "select"
+            ),
             checkboxGroupInput(
               inputId = "transportOptions",
               label = "Transportation:",
@@ -48,39 +65,55 @@ ui <- dashboardPage(
         
           mainPanel(
             leafletOutput(outputId = "map"),
+            fluidRow(
+              column(12, offset = 0, style = "padding: 20px;", uiOutput(outputId = "information"))
+            )
           )
-        ),
-        
-        fluidRow(
-          column(8, offset = 0, style = "padding: 20px;", uiOutput(outputId = "information")),
-          column(4, )
         )
       ),
       
-      # Twitter tab
-      tabItem(tabName = "twitter"
+      # Tripadvisor tab
+      tabItem(tabName = "tripadvisor"
       )
     )
   )
 )
 
 server <- function(input, output){
-  # Load data
-  attractions <- read.csv("./datasets/tourist attractions/TOURISM.csv", stringsAsFactors = F)
-  busstops <- read.csv("./datasets/bus stops/BusStop.csv", stringsAsFactors = F)
-  clinics <- read.csv("./datasets/chas clinics/chas-clinics.csv", stringsAsFactors = F)
-  hawker_centres <- read.csv("./datasets/hawker centres/hawker-centres.csv", stringsAsFactors = F)
-  historic_sites <- read.csv("./datasets/historic sites/historic-sites.csv", stringsAsFactors = F)
-  hospitals <- read.csv("./datasets/hospitals/hospital_data.csv", stringsAsFactors = F)
-  hotels <- read.csv("./datasets/hotels/hotels.csv", stringsAsFactors = F)
-  stations <- read.csv("./datasets/train stations/MRTLRTstations.csv", stringsAsFactors = F)
-  taxi_stands <- read.csv("./datasets/taxi stands/TaxiStop.csv", stringsAsFactors = F)
-  combined_data <- read.csv("./datasets/combined_data.csv", stringsAsFactors = F)
-  
   # Filters combined data frame by checkbox selection
   filtered_data <- reactive({
     viewOptions <- c(input$transportOptions, input$medicalOptions, input$touristOptions)
     combined_data %>% filter(., Group %in% viewOptions)
+  })
+  
+  # Parses the UI selection string into a vector of data and row indices to access
+  # the original data frames
+  getRowDetails <- function(selection) {
+    ref <- unlist(strsplit(selection, split = "-"))
+    data_index <- as.numeric(ref[1])
+    row_index <- as.numeric(ref[2])
+    return (c(data_index, row_index))
+  }
+  
+  # A UI component for searching and selecting a start point and destination
+  output$select <- renderUI({
+    df <- filtered_data()
+    verticalLayout(
+      selectizeInput(
+        inputId = "startPoint",
+        label = "Starting Point:",
+        choices = setNames(with(df, paste0(Group, "-", Row_ID)), df$Name), 
+        multiple = T,
+        options = list(maxItems = 1)
+      ),
+      selectizeInput(
+        inputId = "destination",
+        label = "Destination:",
+        choices = setNames(with(df, paste0(Group, "-", Row_ID)), df$Name), 
+        multiple = T,
+        options = list(maxItems = 1)
+      )
+    )
   })
   
   # List of icons for leaflet map
@@ -112,6 +145,45 @@ server <- function(input, output){
                             popup = ~Name, clusterOptions = markerClusterOptions())
   }
   
+  # Plots a route between two selected locations
+  plotRoute <- function(m) {
+    # Checks if there are no selections or NA is selected in selectizeInput component
+    if (!is.null(input$startPoint) && input$startPoint != "-" && 
+        !is.null(input$destination) && input$destination != "-") {
+      start_ref <- getRowDetails(input$startPoint)
+      dest_ref <- getRowDetails(input$destination)
+      df <- filtered_data()
+
+      start_df <- df %>% filter(Group == start_ref[1], Row_ID == start_ref[2])
+      dest_df <- df %>% filter(Group == dest_ref[1], Row_ID == dest_ref[2])
+      
+      # Get vectors of longitude and latitude of start point and destination
+      start_coords <- start_df %>% select(Longitude, Latitude) %>% as.numeric()
+      dest_coords <- dest_df %>% select(Longitude, Latitude) %>% as.numeric()
+      
+      # Longitudes and Latitudes of entire route between start point and destination
+      route = osrmRoute(start_coords, dest_coords, overview = "full")
+      
+      # Get duration and distance of route
+      route_info = osrmRoute(start_coords, dest_coords, overview = F)
+      
+      hours = route_info[1]/60
+      mins = round(ifelse(route_info[1] < 1, (hours%%1) * 60, route_info[1]))
+      
+      # Plot 2 markers and route between them
+      m %>% addAwesomeMarkers(data = start_df, lng = ~Longitude, lat = ~Latitude, 
+                              layerId = ~paste0(Group, "-", Row_ID), icon = ~map_icons[start_ref[1]], 
+                              popup = ~Name) %>%
+        addAwesomeMarkers(data = dest_df, lng = ~Longitude, lat = ~Latitude, 
+                          layerId = ~paste0(Group, "-", Row_ID), icon = ~map_icons[dest_ref[1]], 
+                          popup = ~Name) %>%
+        addPolylines(route$lon, route$lat, popup = paste(ifelse(hours > 1, paste(round(hours), "hrs"), ""),
+                                                         mins, "mins", br(), round(route_info[2]), "km"))
+    } else {
+      m
+    }
+  }
+  
   output$map <- renderLeaflet({
     # Set map view to Singapore's coordinates
     leaflet() %>% addTiles() %>% setView(lng = 103.8198, lat = 1.3521, zoom = 11)
@@ -119,14 +191,14 @@ server <- function(input, output){
   
   # Retains zoom view of map when user selects additional options
   observe({
-    leafletProxy("map") %>% clearMarkerClusters() %>% plotLocations()
+    leafletProxy("map") %>% clearMarkerClusters() %>% clearShapes() %>% plotLocations() %>% plotRoute()
   })
   
   # Observes the leaflet marker that the user clicks on
   observeEvent(input$map_marker_click, {
-    ref <- unlist(strsplit(input$map_marker_click[[1]], split = "-"))
-    data_index <- as.numeric(ref[1])
-    row_index <- as.numeric(ref[2])
+    ref <- getRowDetails(input$map_marker_click[[1]])
+    data_index <- ref[1]
+    row_index <- ref[2]
     
     # List of data frames
     data <- lapply(list(busstops, stations, taxi_stands, clinics, hospitals, hawker_centres, 
@@ -222,11 +294,12 @@ server <- function(input, output){
           )
         },
         {
-          
+          p("Select one of the options (Transportation, Medical and Tourism) and click on a marker ",
+            "to view additional information.")
         }
       )
     })
   })
 }
 
-shinyApp(ui=ui, server=server)
+shinyApp(ui = ui, server = server)
