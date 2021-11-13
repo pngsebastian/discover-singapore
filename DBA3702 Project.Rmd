@@ -1,7 +1,7 @@
 ---
 title: "DBA3702 Project"
 author: "Png Zheng Jie, Sebastian"
-date: "Last Edited: 8 Nov 2021"
+date: "Last Edited: 14 Nov 2021"
 output:
   html_document:
     toc: true
@@ -170,6 +170,23 @@ historic_sites_clean[, c("LONGITUDE", "LATITUDE")] <- historic_sites@coords[, 1:
 write.csv(historic_sites_clean, "./datasets/historic sites/historic-sites.csv")
 ```
 
+### Hospitals
+```{r}
+website <- "https://www.healthhub.sg/directory/hospitals"
+
+# Create and launch remote driver
+driver <- rsDriver(browser = "chrome", port = 4001L) 
+remoteDriver <- driver[["client"]]
+#remoteDriver$open()
+
+# Navigating remote driver to url
+remoteDriver$navigate(website)
+
+# Close the driver and server
+driver$close()
+remoteDriver[["server"]]$stop()
+```
+
 ### [Hotels](https://data.gov.sg/dataset/hotels)
 ```{r}
 # Read the data from kml file
@@ -302,6 +319,38 @@ stations_clean$STN_NAME <- stations_clean$STN_NAME %>%
 
 # Write data frame into a csv file
 write.csv(stations_clean, "./datasets/train stations/MRTLRTstations.csv")
+```
+
+### Combined Data Frame with Latitude and Longitude
+```{r}
+# Load data
+attractions <- read.csv("./datasets/tourist attractions/TOURISM.csv", stringsAsFactors = F)
+busstops <- read.csv("./datasets/bus stops/BusStop.csv", stringsAsFactors = F)
+clinics <- read.csv("./datasets/chas clinics/chas-clinics.csv", stringsAsFactors = F)
+hawker_centres <- read.csv("./datasets/hawker centres/hawker-centres.csv", stringsAsFactors = F)
+historic_sites <- read.csv("./datasets/historic sites/historic-sites.csv", stringsAsFactors = F)
+hospitals <- read.csv("./datasets/hospitals/hospital_data.csv", stringsAsFactors = F)
+hotels <- read.csv("./datasets/hotels/hotels.csv", stringsAsFactors = F)
+stations <- read.csv("./datasets/train stations/MRTLRTstations.csv", stringsAsFactors = F)
+taxi_stands <- read.csv("./datasets/taxi stands/TaxiStop.csv", stringsAsFactors = F)
+
+# Initial value for Group number (which indicates which data frame it is)
+start = 0
+
+# Combines all data frames into one, add row id and group and export as csv file
+list(busstops[, c("LOC_DESC", "LONGITUDE", "LATITUDE", "X")],
+     stations[, c("STN_NAME", "LONGITUDE", "LATITUDE", "X")],
+     taxi_stands[, c("Type", "Longitude", "Latitude", "X")],
+     clinics[, c("HCI_NAME", "LONGITUDE", "LATITUDE", "X")],
+     hospitals[, c("Name", "lon", "lat", "X")],
+     hawker_centres[, c("NAME", "LONGITUDE", "LATITUDE", "X")],
+     historic_sites[, c("NAME", "LONGITUDE", "LATITUDE", "X")],
+     hotels[, c("NAME", "LONGITUDE", "LATITUDE", "X")],
+     attractions[, c("NAME", "Longitude", "Latitude", "X")]) %>%
+  lapply(., \(x) {start <<- start + 1; x$num <- start; return(x)}) %>%
+  lapply(., \(x) setNames(x, c("Name", "Longitude", "Latitude", "Row_ID", "Group"))) %>%
+  bind_rows() %>%
+  write.csv(., "./datasets/combined_data.csv")
 ```
 
 [Back to top](#){style="float:right; margin:10px 0px 35px"}<br>
