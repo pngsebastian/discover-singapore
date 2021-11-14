@@ -16,13 +16,17 @@ knitr::opts_chunk$set(warning = F, message = F)
 
 ### Libraries
 ```{r}
-library(dplyr)     # %>%
+library(dplyr)     # %>%, mutate, anti_join, select 
+library(httr)      # GET
 library(ggmap)     # geocode, revgeocode
 library(leaflet)
 library(proj4)     # project
 library(rgdal)     # readOGR
-library(rvest)     # read_html, html_text
+library(RSelenium) # rsDriver
+library(rvest)     # read_html, html_text, html_nodes, html_attr
+library(syuzhet)   # get_nrc_sentiment
 library(tidyr)     # separate
+library(tidytext)  # unnest_token
 
 #register_google(key = 'Insert api key here')
 ```
@@ -409,6 +413,97 @@ list(busstops[, c("LOC_DESC", "LONGITUDE", "LATITUDE", "X")],
   lapply(., \(x) setNames(x, c("Name", "Longitude", "Latitude", "Row_ID", "Group"))) %>%
   bind_rows() %>%
   write.csv(., "./datasets/combined_data.csv")
+```
+
+#### **Web Scraping TripAdvisor Reviews**
+```{r}
+tripadvisor <- read.csv("./datasets/tripadvisor/TripAdvisorURL.csv") %>% 
+  select(c("Name", "Url", "Rounded_Reviews")) %>% drop_na() 
+reviews <- NULL
+review_dates <- NULL
+attraction_name <- NULL
+
+for (i in 1:nrow(tripadvisor)) {   
+  url<- tripadvisor[i,2]
+  x <- GET(url, add_headers('user-agent' = 'Student project data scraper - school project use only'))
+  
+  scrap <- x %>% read_html()
+  scrap_reviews <- scrap %>% html_nodes(".dDKKM .NejBf") %>% html_text()
+  scrap_date <- scrap %>% html_nodes(".bNOAd .cspKb") %>% html_text()
+  
+  reviews <- append(reviews,scrap_reviews)
+  review_dates <- append(review_dates, scrap_date)
+  temp_name <- tripadvisor[i,1]
+  attraction_name <- append(attraction_name, rep(temp_name,length(scrap_reviews)))
+  
+  Sys.sleep(2)
+  
+  url<- gsub("Reviews-","Reviews-or",url)
+  for (i in seq(10, tripadvisor[i,3], by=10)) {
+    url<- gsub("-or", paste0("-or",i),url)
+    x <- GET(url, add_headers('user-agent' = 'Student project data scraper - school project use only'))
+    
+    scrap <- x %>% read_html()
+    scrap_reviews <- scrap %>% html_nodes(".dDKKM .NejBf") %>% html_text()
+    scrap_date <- scrap %>% html_nodes(".bNOAd .cspKb") %>% html_text()
+    
+    reviews <- append(reviews,scrap_reviews)
+    review_dates <- append(review_dates,scrap_date)
+    
+    Sys.sleep(2)
+    
+    url<- gsub(paste0("-or",i),"-or", url)
+    attraction_name <- append(attraction_name, rep(temp_name, length(scrap_reviews)))
+  }
+}
+
+name <- as.data.frame(attraction_name)
+reviews <- as.data.frame(reviews)
+review_dates <- as.data.frame(review_dates)
+all_reviews <-cbind(name,reviews,review_dates)
+all_reviews$review_dates <- gsub("Written ", "", all_reviews$review_dates)
+
+write.csv(all_reviews,"./datasets/tripadvisor/Reviews.csv")
+```
+
+#### **Converting Tripadvisor Reviews to Words for Wordcloud and Sentiment Analysis**
+```{r}
+review <- read.csv("./datasets/tripadvisor/Reviews.csv")
+
+freq_word_df <- NULL
+sentiment_df <- NULL
+
+for (i in unique(review$attraction_name)) {
+  review_analysis  <- review %>% filter(attraction_name == i)
+  
+  # Convert to Words
+  review_analysis$reviews <- gsub("[[:punct:]]", "", review_analysis$reviews)
+  review_words <- review_analysis %>% select(reviews) %>% unnest_tokens(word, reviews)
+  review_words <- review_words %>% anti_join(stop_words)
+  review_words <- review_words %>% mutate(attraction_name = i)
+  
+  freq_word_df <- append(freq_word_df,list(review_words))
+  
+  # Sentiment Analysis
+   ew_sentiment<-get_nrc_sentiment((review_words$word))
+   sentimentscores<-data.frame(colSums(ew_sentiment[,]))
+   sentimentscores <- sentimentscores %>% mutate(attraction_name = i)
+   
+   sentiment_df <-append(sentiment_df,list(sentimentscores))
+
+}
+
+freq_word_df <- plyr::ldply(freq_word_df , rbind)
+
+sentiment_df <- plyr::ldply(sentiment_df , rbind)
+sentiment_df <- sentiment_df %>% 
+  mutate(sentiment = rep(c("anger", "anticipation", "disgust", "fear", "joy", "sadness",
+                           "surprise", "trust", "negative", "positive"), nrow(sentiment_df)/10))
+names(sentiment_df)[1] <- "score"
+sentiment_df <- sentiment_df %>% select(2,3,1)
+
+write.csv(freq_word_df,"./datasets/tripadvisor/ReviewWords.csv")
+write.csv(sentiment_df ,"./datasets/tripadvisor/Sentiments.csv")
 ```
 
 [Back to top](#){style="float:right; margin:10px 0px 35px"}<br>

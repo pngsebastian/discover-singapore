@@ -1,0 +1,831 @@
+"","attraction_name","sentiment","score"
+"1","Chinatown Heritage Centre, Singapore","anger",312
+"2","Chinatown Heritage Centre, Singapore","anticipation",970
+"3","Chinatown Heritage Centre, Singapore","disgust",227
+"4","Chinatown Heritage Centre, Singapore","fear",335
+"5","Chinatown Heritage Centre, Singapore","joy",997
+"6","Chinatown Heritage Centre, Singapore","sadness",360
+"7","Chinatown Heritage Centre, Singapore","surprise",363
+"8","Chinatown Heritage Centre, Singapore","trust",1663
+"9","Chinatown Heritage Centre, Singapore","negative",788
+"10","Chinatown Heritage Centre, Singapore","positive",3230
+"11","Thian Hock Keng Temple, Singapore","anger",50
+"12","Thian Hock Keng Temple, Singapore","anticipation",281
+"13","Thian Hock Keng Temple, Singapore","disgust",22
+"14","Thian Hock Keng Temple, Singapore","fear",95
+"15","Thian Hock Keng Temple, Singapore","joy",359
+"16","Thian Hock Keng Temple, Singapore","sadness",75
+"17","Thian Hock Keng Temple, Singapore","surprise",131
+"18","Thian Hock Keng Temple, Singapore","trust",376
+"19","Thian Hock Keng Temple, Singapore","negative",99
+"20","Thian Hock Keng Temple, Singapore","positive",918
+"21","Pinnacle@Duxton","anger",91
+"22","Pinnacle@Duxton","anticipation",401
+"23","Pinnacle@Duxton","disgust",22
+"24","Pinnacle@Duxton","fear",112
+"25","Pinnacle@Duxton","joy",276
+"26","Pinnacle@Duxton","sadness",66
+"27","Pinnacle@Duxton","surprise",103
+"28","Pinnacle@Duxton","trust",412
+"29","Pinnacle@Duxton","negative",154
+"30","Pinnacle@Duxton","positive",863
+"31","Haw Par Villa: Singapore Theme Park","anger",979
+"32","Haw Par Villa: Singapore Theme Park","anticipation",1417
+"33","Haw Par Villa: Singapore Theme Park","disgust",913
+"34","Haw Par Villa: Singapore Theme Park","fear",1075
+"35","Haw Par Villa: Singapore Theme Park","joy",1301
+"36","Haw Par Villa: Singapore Theme Park","sadness",1002
+"37","Haw Par Villa: Singapore Theme Park","surprise",639
+"38","Haw Par Villa: Singapore Theme Park","trust",1200
+"39","Haw Par Villa: Singapore Theme Park","negative",1807
+"40","Haw Par Villa: Singapore Theme Park","positive",3441
+"41","NUS Baba House - Singapore Peranakan Architecture","anger",41
+"42","NUS Baba House - Singapore Peranakan Architecture","anticipation",153
+"43","NUS Baba House - Singapore Peranakan Architecture","disgust",25
+"44","NUS Baba House - Singapore Peranakan Architecture","fear",77
+"45","NUS Baba House - Singapore Peranakan Architecture","joy",160
+"46","NUS Baba House - Singapore Peranakan Architecture","sadness",56
+"47","NUS Baba House - Singapore Peranakan Architecture","surprise",80
+"48","NUS Baba House - Singapore Peranakan Architecture","trust",225
+"49","NUS Baba House - Singapore Peranakan Architecture","negative",90
+"50","NUS Baba House - Singapore Peranakan Architecture","positive",488
+"51","Esplanade Theatre","anger",226
+"52","Esplanade Theatre","anticipation",1089
+"53","Esplanade Theatre","disgust",100
+"54","Esplanade Theatre","fear",246
+"55","Esplanade Theatre","joy",1439
+"56","Esplanade Theatre","sadness",512
+"57","Esplanade Theatre","surprise",619
+"58","Esplanade Theatre","trust",1264
+"59","Esplanade Theatre","negative",347
+"60","Esplanade Theatre","positive",2747
+"61","Gardens by the Bay","anger",300
+"62","Gardens by the Bay","anticipation",1325
+"63","Gardens by the Bay","disgust",165
+"64","Gardens by the Bay","fear",253
+"65","Gardens by the Bay","joy",1695
+"66","Gardens by the Bay","sadness",432
+"67","Gardens by the Bay","surprise",624
+"68","Gardens by the Bay","trust",1248
+"69","Gardens by the Bay","negative",549
+"70","Gardens by the Bay","positive",3361
+"71","Malay Heritage Centre, Singapore","anger",59
+"72","Malay Heritage Centre, Singapore","anticipation",140
+"73","Malay Heritage Centre, Singapore","disgust",11
+"74","Malay Heritage Centre, Singapore","fear",62
+"75","Malay Heritage Centre, Singapore","joy",181
+"76","Malay Heritage Centre, Singapore","sadness",61
+"77","Malay Heritage Centre, Singapore","surprise",72
+"78","Malay Heritage Centre, Singapore","trust",266
+"79","Malay Heritage Centre, Singapore","negative",93
+"80","Malay Heritage Centre, Singapore","positive",585
+"81","Peranakan Museum Singapore: History & Culture","anger",161
+"82","Peranakan Museum Singapore: History & Culture","anticipation",1005
+"83","Peranakan Museum Singapore: History & Culture","disgust",103
+"84","Peranakan Museum Singapore: History & Culture","fear",245
+"85","Peranakan Museum Singapore: History & Culture","joy",1319
+"86","Peranakan Museum Singapore: History & Culture","sadness",366
+"87","Peranakan Museum Singapore: History & Culture","surprise",571
+"88","Peranakan Museum Singapore: History & Culture","trust",1479
+"89","Peranakan Museum Singapore: History & Culture","negative",510
+"90","Peranakan Museum Singapore: History & Culture","positive",3903
+"91","National Museum of Singapore","anger",707
+"92","National Museum of Singapore","anticipation",2930
+"93","National Museum of Singapore","disgust",368
+"94","National Museum of Singapore","fear",801
+"95","National Museum of Singapore","joy",3321
+"96","National Museum of Singapore","sadness",1004
+"97","National Museum of Singapore","surprise",1340
+"98","National Museum of Singapore","trust",3889
+"99","National Museum of Singapore","negative",1841
+"100","National Museum of Singapore","positive",9245
+"101","Singapore Philatelic Museum","anger",81
+"102","Singapore Philatelic Museum","anticipation",312
+"103","Singapore Philatelic Museum","disgust",40
+"104","Singapore Philatelic Museum","fear",61
+"105","Singapore Philatelic Museum","joy",309
+"106","Singapore Philatelic Museum","sadness",90
+"107","Singapore Philatelic Museum","surprise",110
+"108","Singapore Philatelic Museum","trust",337
+"109","Singapore Philatelic Museum","negative",176
+"110","Singapore Philatelic Museum","positive",770
+"111","Kranji War Memorial Landmark in Singapore","anger",470
+"112","Kranji War Memorial Landmark in Singapore","anticipation",1243
+"113","Kranji War Memorial Landmark in Singapore","disgust",216
+"114","Kranji War Memorial Landmark in Singapore","fear",1539
+"115","Kranji War Memorial Landmark in Singapore","joy",1304
+"116","Kranji War Memorial Landmark in Singapore","sadness",1107
+"117","Kranji War Memorial Landmark in Singapore","surprise",558
+"118","Kranji War Memorial Landmark in Singapore","trust",1919
+"119","Kranji War Memorial Landmark in Singapore","negative",2045
+"120","Kranji War Memorial Landmark in Singapore","positive",3492
+"121","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","anger",95
+"122","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","anticipation",311
+"123","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","disgust",53
+"124","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","fear",135
+"125","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","joy",365
+"126","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","sadness",94
+"127","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","surprise",167
+"128","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","trust",388
+"129","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","negative",153
+"130","Sri Veeramakaliamman Temple: Hindu Temple in Singapore","positive",861
+"131","Armenian Church in Singapore","anger",20
+"132","Armenian Church in Singapore","anticipation",245
+"133","Armenian Church in Singapore","disgust",13
+"134","Armenian Church in Singapore","fear",47
+"135","Armenian Church in Singapore","joy",273
+"136","Armenian Church in Singapore","sadness",55
+"137","Armenian Church in Singapore","surprise",43
+"138","Armenian Church in Singapore","trust",277
+"139","Armenian Church in Singapore","negative",62
+"140","Armenian Church in Singapore","positive",423
+"141","CHIJMES Singapore","anger",144
+"142","CHIJMES Singapore","anticipation",837
+"143","CHIJMES Singapore","disgust",98
+"144","CHIJMES Singapore","fear",212
+"145","CHIJMES Singapore","joy",1232
+"146","CHIJMES Singapore","sadness",278
+"147","CHIJMES Singapore","surprise",311
+"148","CHIJMES Singapore","trust",1263
+"149","CHIJMES Singapore","negative",351
+"150","CHIJMES Singapore","positive",2303
+"151","St Andrew’s Cathedral- Singapore Architecture Landmark","anger",70
+"152","St Andrew’s Cathedral- Singapore Architecture Landmark","anticipation",582
+"153","St Andrew’s Cathedral- Singapore Architecture Landmark","disgust",64
+"154","St Andrew’s Cathedral- Singapore Architecture Landmark","fear",125
+"155","St Andrew’s Cathedral- Singapore Architecture Landmark","joy",873
+"156","St Andrew’s Cathedral- Singapore Architecture Landmark","sadness",136
+"157","St Andrew’s Cathedral- Singapore Architecture Landmark","surprise",159
+"158","St Andrew’s Cathedral- Singapore Architecture Landmark","trust",910
+"159","St Andrew’s Cathedral- Singapore Architecture Landmark","negative",165
+"160","St Andrew’s Cathedral- Singapore Architecture Landmark","positive",1465
+"161","Hajjah Fatimah Mosque","anger",33
+"162","Hajjah Fatimah Mosque","anticipation",17
+"163","Hajjah Fatimah Mosque","disgust",9
+"164","Hajjah Fatimah Mosque","fear",6
+"165","Hajjah Fatimah Mosque","joy",20
+"166","Hajjah Fatimah Mosque","sadness",4
+"167","Hajjah Fatimah Mosque","surprise",9
+"168","Hajjah Fatimah Mosque","trust",28
+"169","Hajjah Fatimah Mosque","negative",6
+"170","Hajjah Fatimah Mosque","positive",60
+"171","Old Supreme Court Singapore","anger",65
+"172","Old Supreme Court Singapore","anticipation",116
+"173","Old Supreme Court Singapore","disgust",18
+"174","Old Supreme Court Singapore","fear",76
+"175","Old Supreme Court Singapore","joy",42
+"176","Old Supreme Court Singapore","sadness",25
+"177","Old Supreme Court Singapore","surprise",26
+"178","Old Supreme Court Singapore","trust",108
+"179","Old Supreme Court Singapore","negative",42
+"180","Old Supreme Court Singapore","positive",233
+"181","SIT Flats Singapore","anger",32
+"182","SIT Flats Singapore","anticipation",159
+"183","SIT Flats Singapore","disgust",22
+"184","SIT Flats Singapore","fear",52
+"185","SIT Flats Singapore","joy",195
+"186","SIT Flats Singapore","sadness",65
+"187","SIT Flats Singapore","surprise",76
+"188","SIT Flats Singapore","trust",266
+"189","SIT Flats Singapore","negative",86
+"190","SIT Flats Singapore","positive",468
+"191","Gillman Barracks – YourSingapore","anger",28
+"192","Gillman Barracks – YourSingapore","anticipation",175
+"193","Gillman Barracks – YourSingapore","disgust",19
+"194","Gillman Barracks – YourSingapore","fear",34
+"195","Gillman Barracks – YourSingapore","joy",180
+"196","Gillman Barracks – YourSingapore","sadness",133
+"197","Gillman Barracks – YourSingapore","surprise",134
+"198","Gillman Barracks – YourSingapore","trust",86
+"199","Gillman Barracks – YourSingapore","negative",67
+"200","Gillman Barracks – YourSingapore","positive",309
+"201","The Japanese Cemetery Park","anger",6
+"202","The Japanese Cemetery Park","anticipation",22
+"203","The Japanese Cemetery Park","disgust",4
+"204","The Japanese Cemetery Park","fear",38
+"205","The Japanese Cemetery Park","joy",21
+"206","The Japanese Cemetery Park","sadness",37
+"207","The Japanese Cemetery Park","surprise",11
+"208","The Japanese Cemetery Park","trust",29
+"209","The Japanese Cemetery Park","negative",44
+"210","The Japanese Cemetery Park","positive",59
+"211","Dalhousie Obelisk, a Singapore Landmark","anger",0
+"212","Dalhousie Obelisk, a Singapore Landmark","anticipation",9
+"213","Dalhousie Obelisk, a Singapore Landmark","disgust",1
+"214","Dalhousie Obelisk, a Singapore Landmark","fear",1
+"215","Dalhousie Obelisk, a Singapore Landmark","joy",8
+"216","Dalhousie Obelisk, a Singapore Landmark","sadness",3
+"217","Dalhousie Obelisk, a Singapore Landmark","surprise",7
+"218","Dalhousie Obelisk, a Singapore Landmark","trust",13
+"219","Dalhousie Obelisk, a Singapore Landmark","negative",3
+"220","Dalhousie Obelisk, a Singapore Landmark","positive",51
+"221","Raffles Statue – Sir Stamford Raffles Landing Site","anger",16
+"222","Raffles Statue – Sir Stamford Raffles Landing Site","anticipation",96
+"223","Raffles Statue – Sir Stamford Raffles Landing Site","disgust",12
+"224","Raffles Statue – Sir Stamford Raffles Landing Site","fear",30
+"225","Raffles Statue – Sir Stamford Raffles Landing Site","joy",89
+"226","Raffles Statue – Sir Stamford Raffles Landing Site","sadness",30
+"227","Raffles Statue – Sir Stamford Raffles Landing Site","surprise",36
+"228","Raffles Statue – Sir Stamford Raffles Landing Site","trust",161
+"229","Raffles Statue – Sir Stamford Raffles Landing Site","negative",54
+"230","Raffles Statue – Sir Stamford Raffles Landing Site","positive",467
+"231","Lim Bo Seng Memorial","anger",11
+"232","Lim Bo Seng Memorial","anticipation",18
+"233","Lim Bo Seng Memorial","disgust",6
+"234","Lim Bo Seng Memorial","fear",23
+"235","Lim Bo Seng Memorial","joy",16
+"236","Lim Bo Seng Memorial","sadness",11
+"237","Lim Bo Seng Memorial","surprise",9
+"238","Lim Bo Seng Memorial","trust",20
+"239","Lim Bo Seng Memorial","negative",27
+"240","Lim Bo Seng Memorial","positive",43
+"241","Indian National Army (INA) Monument in Singapore","anger",17
+"242","Indian National Army (INA) Monument in Singapore","anticipation",19
+"243","Indian National Army (INA) Monument in Singapore","disgust",7
+"244","Indian National Army (INA) Monument in Singapore","fear",29
+"245","Indian National Army (INA) Monument in Singapore","joy",11
+"246","Indian National Army (INA) Monument in Singapore","sadness",14
+"247","Indian National Army (INA) Monument in Singapore","surprise",5
+"248","Indian National Army (INA) Monument in Singapore","trust",23
+"249","Indian National Army (INA) Monument in Singapore","negative",39
+"250","Indian National Army (INA) Monument in Singapore","positive",64
+"251","Reflections at Bukit Chandu: Singapore War Memorial","anger",159
+"252","Reflections at Bukit Chandu: Singapore War Memorial","anticipation",153
+"253","Reflections at Bukit Chandu: Singapore War Memorial","disgust",59
+"254","Reflections at Bukit Chandu: Singapore War Memorial","fear",217
+"255","Reflections at Bukit Chandu: Singapore War Memorial","joy",143
+"256","Reflections at Bukit Chandu: Singapore War Memorial","sadness",125
+"257","Reflections at Bukit Chandu: Singapore War Memorial","surprise",83
+"258","Reflections at Bukit Chandu: Singapore War Memorial","trust",230
+"259","Reflections at Bukit Chandu: Singapore War Memorial","negative",290
+"260","Reflections at Bukit Chandu: Singapore War Memorial","positive",462
+"261","The Civilian War Memorial park in Singapore","anger",54
+"262","The Civilian War Memorial park in Singapore","anticipation",100
+"263","The Civilian War Memorial park in Singapore","disgust",34
+"264","The Civilian War Memorial park in Singapore","fear",152
+"265","The Civilian War Memorial park in Singapore","joy",90
+"266","The Civilian War Memorial park in Singapore","sadness",91
+"267","The Civilian War Memorial park in Singapore","surprise",28
+"268","The Civilian War Memorial park in Singapore","trust",146
+"269","The Civilian War Memorial park in Singapore","negative",210
+"270","The Civilian War Memorial park in Singapore","positive",350
+"271","Maghain Aboth Synagogue","anger",6
+"272","Maghain Aboth Synagogue","anticipation",30
+"273","Maghain Aboth Synagogue","disgust",6
+"274","Maghain Aboth Synagogue","fear",9
+"275","Maghain Aboth Synagogue","joy",23
+"276","Maghain Aboth Synagogue","sadness",15
+"277","Maghain Aboth Synagogue","surprise",17
+"278","Maghain Aboth Synagogue","trust",30
+"279","Maghain Aboth Synagogue","negative",19
+"280","Maghain Aboth Synagogue","positive",79
+"281","Sultan Mosque (Masjid Sultan) Singapore","anger",812
+"282","Sultan Mosque (Masjid Sultan) Singapore","anticipation",506
+"283","Sultan Mosque (Masjid Sultan) Singapore","disgust",64
+"284","Sultan Mosque (Masjid Sultan) Singapore","fear",293
+"285","Sultan Mosque (Masjid Sultan) Singapore","joy",708
+"286","Sultan Mosque (Masjid Sultan) Singapore","sadness",142
+"287","Sultan Mosque (Masjid Sultan) Singapore","surprise",226
+"288","Sultan Mosque (Masjid Sultan) Singapore","trust",899
+"289","Sultan Mosque (Masjid Sultan) Singapore","negative",251
+"290","Sultan Mosque (Masjid Sultan) Singapore","positive",1742
+"291","Sri Mariamman Temple: Hindu Temple in Singapore","anger",267
+"292","Sri Mariamman Temple: Hindu Temple in Singapore","anticipation",694
+"293","Sri Mariamman Temple: Hindu Temple in Singapore","disgust",100
+"294","Sri Mariamman Temple: Hindu Temple in Singapore","fear",266
+"295","Sri Mariamman Temple: Hindu Temple in Singapore","joy",808
+"296","Sri Mariamman Temple: Hindu Temple in Singapore","sadness",272
+"297","Sri Mariamman Temple: Hindu Temple in Singapore","surprise",362
+"298","Sri Mariamman Temple: Hindu Temple in Singapore","trust",936
+"299","Sri Mariamman Temple: Hindu Temple in Singapore","negative",459
+"300","Sri Mariamman Temple: Hindu Temple in Singapore","positive",1902
+"301","ArtScience Museum Singapore","anger",644
+"302","ArtScience Museum Singapore","anticipation",2698
+"303","ArtScience Museum Singapore","disgust",398
+"304","ArtScience Museum Singapore","fear",607
+"305","ArtScience Museum Singapore","joy",2734
+"306","ArtScience Museum Singapore","sadness",1200
+"307","ArtScience Museum Singapore","surprise",1506
+"308","ArtScience Museum Singapore","trust",2203
+"309","ArtScience Museum Singapore","negative",1336
+"310","ArtScience Museum Singapore","positive",6032
+"311","Old Ford Factory Singapore Museum","anger",43
+"312","Old Ford Factory Singapore Museum","anticipation",93
+"313","Old Ford Factory Singapore Museum","disgust",17
+"314","Old Ford Factory Singapore Museum","fear",99
+"315","Old Ford Factory Singapore Museum","joy",83
+"316","Old Ford Factory Singapore Museum","sadness",64
+"317","Old Ford Factory Singapore Museum","surprise",36
+"318","Old Ford Factory Singapore Museum","trust",152
+"319","Old Ford Factory Singapore Museum","negative",146
+"320","Old Ford Factory Singapore Museum","positive",306
+"321","Singapore City Gallery","anger",39
+"322","Singapore City Gallery","anticipation",435
+"323","Singapore City Gallery","disgust",26
+"324","Singapore City Gallery","fear",73
+"325","Singapore City Gallery","joy",340
+"326","Singapore City Gallery","sadness",68
+"327","Singapore City Gallery","surprise",111
+"328","Singapore City Gallery","trust",528
+"329","Singapore City Gallery","negative",118
+"330","Singapore City Gallery","positive",1173
+"331","Changi Museum Singapore","anger",1746
+"332","Changi Museum Singapore","anticipation",2290
+"333","Changi Museum Singapore","disgust",947
+"334","Changi Museum Singapore","fear",2635
+"335","Changi Museum Singapore","joy",1975
+"336","Changi Museum Singapore","sadness",2143
+"337","Changi Museum Singapore","surprise",908
+"338","Changi Museum Singapore","trust",3309
+"339","Changi Museum Singapore","negative",3716
+"340","Changi Museum Singapore","positive",7149
+"341","Henderson Waves Bridge","anger",140
+"342","Henderson Waves Bridge","anticipation",651
+"343","Henderson Waves Bridge","disgust",78
+"344","Henderson Waves Bridge","fear",171
+"345","Henderson Waves Bridge","joy",537
+"346","Henderson Waves Bridge","sadness",150
+"347","Henderson Waves Bridge","surprise",299
+"348","Henderson Waves Bridge","trust",628
+"349","Henderson Waves Bridge","negative",291
+"350","Henderson Waves Bridge","positive",1258
+"351","Labrador Nature Reserve","anger",139
+"352","Labrador Nature Reserve","anticipation",356
+"353","Labrador Nature Reserve","disgust",57
+"354","Labrador Nature Reserve","fear",249
+"355","Labrador Nature Reserve","joy",346
+"356","Labrador Nature Reserve","sadness",111
+"357","Labrador Nature Reserve","surprise",168
+"358","Labrador Nature Reserve","trust",424
+"359","Labrador Nature Reserve","negative",314
+"360","Labrador Nature Reserve","positive",902
+"361","Henderson Waves Bridge","anger",140
+"362","Henderson Waves Bridge","anticipation",651
+"363","Henderson Waves Bridge","disgust",78
+"364","Henderson Waves Bridge","fear",171
+"365","Henderson Waves Bridge","joy",537
+"366","Henderson Waves Bridge","sadness",150
+"367","Henderson Waves Bridge","surprise",299
+"368","Henderson Waves Bridge","trust",628
+"369","Henderson Waves Bridge","negative",291
+"370","Henderson Waves Bridge","positive",1258
+"371","Labrador Nature Reserve","anger",139
+"372","Labrador Nature Reserve","anticipation",356
+"373","Labrador Nature Reserve","disgust",57
+"374","Labrador Nature Reserve","fear",249
+"375","Labrador Nature Reserve","joy",346
+"376","Labrador Nature Reserve","sadness",111
+"377","Labrador Nature Reserve","surprise",168
+"378","Labrador Nature Reserve","trust",424
+"379","Labrador Nature Reserve","negative",314
+"380","Labrador Nature Reserve","positive",902
+"381","Marina Bay Sands, Singapore","anger",604
+"382","Marina Bay Sands, Singapore","anticipation",1720
+"383","Marina Bay Sands, Singapore","disgust",339
+"384","Marina Bay Sands, Singapore","fear",473
+"385","Marina Bay Sands, Singapore","joy",1394
+"386","Marina Bay Sands, Singapore","sadness",563
+"387","Marina Bay Sands, Singapore","surprise",843
+"388","Marina Bay Sands, Singapore","trust",1597
+"389","Marina Bay Sands, Singapore","negative",1531
+"390","Marina Bay Sands, Singapore","positive",2772
+"391","Kusu Island, Singapore","anger",47
+"392","Kusu Island, Singapore","anticipation",265
+"393","Kusu Island, Singapore","disgust",43
+"394","Kusu Island, Singapore","fear",79
+"395","Kusu Island, Singapore","joy",311
+"396","Kusu Island, Singapore","sadness",72
+"397","Kusu Island, Singapore","surprise",139
+"398","Kusu Island, Singapore","trust",289
+"399","Kusu Island, Singapore","negative",129
+"400","Kusu Island, Singapore","positive",552
+"401","Jurong Bird Park, Singapore: Attractions & Things to Do","anger",317
+"402","Jurong Bird Park, Singapore: Attractions & Things to Do","anticipation",1344
+"403","Jurong Bird Park, Singapore: Attractions & Things to Do","disgust",286
+"404","Jurong Bird Park, Singapore: Attractions & Things to Do","fear",491
+"405","Jurong Bird Park, Singapore: Attractions & Things to Do","joy",1460
+"406","Jurong Bird Park, Singapore: Attractions & Things to Do","sadness",401
+"407","Jurong Bird Park, Singapore: Attractions & Things to Do","surprise",587
+"408","Jurong Bird Park, Singapore: Attractions & Things to Do","trust",1427
+"409","Jurong Bird Park, Singapore: Attractions & Things to Do","negative",876
+"410","Jurong Bird Park, Singapore: Attractions & Things to Do","positive",3282
+"411","East Coast Park Singapore","anger",248
+"412","East Coast Park Singapore","anticipation",1725
+"413","East Coast Park Singapore","disgust",240
+"414","East Coast Park Singapore","fear",455
+"415","East Coast Park Singapore","joy",2460
+"416","East Coast Park Singapore","sadness",369
+"417","East Coast Park Singapore","surprise",634
+"418","East Coast Park Singapore","trust",1809
+"419","East Coast Park Singapore","negative",736
+"420","East Coast Park Singapore","positive",3896
+"421","Fort Canning Park","anger",458
+"422","Fort Canning Park","anticipation",1289
+"423","Fort Canning Park","disgust",188
+"424","Fort Canning Park","fear",606
+"425","Fort Canning Park","joy",1444
+"426","Fort Canning Park","sadness",583
+"427","Fort Canning Park","surprise",625
+"428","Fort Canning Park","trust",2041
+"429","Fort Canning Park","negative",946
+"430","Fort Canning Park","positive",3275
+"431","Fuk Tak Chi Museum & Places of Interest","anger",5
+"432","Fuk Tak Chi Museum & Places of Interest","anticipation",23
+"433","Fuk Tak Chi Museum & Places of Interest","disgust",3
+"434","Fuk Tak Chi Museum & Places of Interest","fear",10
+"435","Fuk Tak Chi Museum & Places of Interest","joy",17
+"436","Fuk Tak Chi Museum & Places of Interest","sadness",6
+"437","Fuk Tak Chi Museum & Places of Interest","surprise",8
+"438","Fuk Tak Chi Museum & Places of Interest","trust",14
+"439","Fuk Tak Chi Museum & Places of Interest","negative",10
+"440","Fuk Tak Chi Museum & Places of Interest","positive",59
+"441","Katong Antique House Singapore: Peranakan Heritage","anger",7
+"442","Katong Antique House Singapore: Peranakan Heritage","anticipation",30
+"443","Katong Antique House Singapore: Peranakan Heritage","disgust",5
+"444","Katong Antique House Singapore: Peranakan Heritage","fear",11
+"445","Katong Antique House Singapore: Peranakan Heritage","joy",32
+"446","Katong Antique House Singapore: Peranakan Heritage","sadness",13
+"447","Katong Antique House Singapore: Peranakan Heritage","surprise",9
+"448","Katong Antique House Singapore: Peranakan Heritage","trust",39
+"449","Katong Antique House Singapore: Peranakan Heritage","negative",23
+"450","Katong Antique House Singapore: Peranakan Heritage","positive",111
+"451","HortPark","anger",43
+"452","HortPark","anticipation",215
+"453","HortPark","disgust",30
+"454","HortPark","fear",38
+"455","HortPark","joy",304
+"456","HortPark","sadness",57
+"457","HortPark","surprise",113
+"458","HortPark","trust",252
+"459","HortPark","negative",84
+"460","HortPark","positive",547
+"461","Merlion Park, Singapore: Attractions & Things to Do","anger",1111
+"462","Merlion Park, Singapore: Attractions & Things to Do","anticipation",5172
+"463","Merlion Park, Singapore: Attractions & Things to Do","disgust",542
+"464","Merlion Park, Singapore: Attractions & Things to Do","fear",1809
+"465","Merlion Park, Singapore: Attractions & Things to Do","joy",4745
+"466","Merlion Park, Singapore: Attractions & Things to Do","sadness",1279
+"467","Merlion Park, Singapore: Attractions & Things to Do","surprise",2515
+"468","Merlion Park, Singapore: Attractions & Things to Do","trust",4472
+"469","Merlion Park, Singapore: Attractions & Things to Do","negative",2230
+"470","Merlion Park, Singapore: Attractions & Things to Do","positive",13278
+"471","Red Dot Design Museum, Singapore","anger",50
+"472","Red Dot Design Museum, Singapore","anticipation",221
+"473","Red Dot Design Museum, Singapore","disgust",40
+"474","Red Dot Design Museum, Singapore","fear",40
+"475","Red Dot Design Museum, Singapore","joy",240
+"476","Red Dot Design Museum, Singapore","sadness",68
+"477","Red Dot Design Museum, Singapore","surprise",140
+"478","Red Dot Design Museum, Singapore","trust",223
+"479","Red Dot Design Museum, Singapore","negative",106
+"480","Red Dot Design Museum, Singapore","positive",544
+"481","Singapore Art Museum","anger",177
+"482","Singapore Art Museum","anticipation",1083
+"483","Singapore Art Museum","disgust",133
+"484","Singapore Art Museum","fear",193
+"485","Singapore Art Museum","joy",1146
+"486","Singapore Art Museum","sadness",677
+"487","Singapore Art Museum","surprise",717
+"488","Singapore Art Museum","trust",754
+"489","Singapore Art Museum","negative",398
+"490","Singapore Art Museum","positive",2251
+"491","Esplanade Theatres on the Bay","anger",226
+"492","Esplanade Theatres on the Bay","anticipation",1089
+"493","Esplanade Theatres on the Bay","disgust",100
+"494","Esplanade Theatres on the Bay","fear",246
+"495","Esplanade Theatres on the Bay","joy",1439
+"496","Esplanade Theatres on the Bay","sadness",512
+"497","Esplanade Theatres on the Bay","surprise",619
+"498","Esplanade Theatres on the Bay","trust",1264
+"499","Esplanade Theatres on the Bay","negative",347
+"500","Esplanade Theatres on the Bay","positive",2747
+"501","National Design Centre, Singapore","anger",4
+"502","National Design Centre, Singapore","anticipation",18
+"503","National Design Centre, Singapore","disgust",5
+"504","National Design Centre, Singapore","fear",10
+"505","National Design Centre, Singapore","joy",26
+"506","National Design Centre, Singapore","sadness",9
+"507","National Design Centre, Singapore","surprise",10
+"508","National Design Centre, Singapore","trust",33
+"509","National Design Centre, Singapore","negative",15
+"510","National Design Centre, Singapore","positive",89
+"511","Victoria Theatre Singapore","anger",26
+"512","Victoria Theatre Singapore","anticipation",98
+"513","Victoria Theatre Singapore","disgust",13
+"514","Victoria Theatre Singapore","fear",34
+"515","Victoria Theatre Singapore","joy",125
+"516","Victoria Theatre Singapore","sadness",59
+"517","Victoria Theatre Singapore","surprise",42
+"518","Victoria Theatre Singapore","trust",117
+"519","Victoria Theatre Singapore","negative",50
+"520","Victoria Theatre Singapore","positive",293
+"521","Sun Yat Sen Memorial Hall","anger",66
+"522","Sun Yat Sen Memorial Hall","anticipation",253
+"523","Sun Yat Sen Memorial Hall","disgust",18
+"524","Sun Yat Sen Memorial Hall","fear",90
+"525","Sun Yat Sen Memorial Hall","joy",228
+"526","Sun Yat Sen Memorial Hall","sadness",86
+"527","Sun Yat Sen Memorial Hall","surprise",164
+"528","Sun Yat Sen Memorial Hall","trust",263
+"529","Sun Yat Sen Memorial Hall","negative",136
+"530","Sun Yat Sen Memorial Hall","positive",539
+"531","Asian Civilisations Museum & Singapore Museum","anger",406
+"532","Asian Civilisations Museum & Singapore Museum","anticipation",1852
+"533","Asian Civilisations Museum & Singapore Museum","disgust",201
+"534","Asian Civilisations Museum & Singapore Museum","fear",618
+"535","Asian Civilisations Museum & Singapore Museum","joy",2171
+"536","Asian Civilisations Museum & Singapore Museum","sadness",930
+"537","Asian Civilisations Museum & Singapore Museum","surprise",1007
+"538","Asian Civilisations Museum & Singapore Museum","trust",2330
+"539","Asian Civilisations Museum & Singapore Museum","negative",1242
+"540","Asian Civilisations Museum & Singapore Museum","positive",6014
+"541","Orchard Road, Singapore: Asia's Most Famous Shopping Street","anger",233
+"542","Orchard Road, Singapore: Asia's Most Famous Shopping Street","anticipation",1555
+"543","Orchard Road, Singapore: Asia's Most Famous Shopping Street","disgust",99
+"544","Orchard Road, Singapore: Asia's Most Famous Shopping Street","fear",246
+"545","Orchard Road, Singapore: Asia's Most Famous Shopping Street","joy",1776
+"546","Orchard Road, Singapore: Asia's Most Famous Shopping Street","sadness",295
+"547","Orchard Road, Singapore: Asia's Most Famous Shopping Street","surprise",1064
+"548","Orchard Road, Singapore: Asia's Most Famous Shopping Street","trust",1744
+"549","Orchard Road, Singapore: Asia's Most Famous Shopping Street","negative",517
+"550","Orchard Road, Singapore: Asia's Most Famous Shopping Street","positive",3012
+"551","MacRitchie Singapore & Singapore Nature Reserve","anger",432
+"552","MacRitchie Singapore & Singapore Nature Reserve","anticipation",1369
+"553","MacRitchie Singapore & Singapore Nature Reserve","disgust",373
+"554","MacRitchie Singapore & Singapore Nature Reserve","fear",494
+"555","MacRitchie Singapore & Singapore Nature Reserve","joy",1248
+"556","MacRitchie Singapore & Singapore Nature Reserve","sadness",345
+"557","MacRitchie Singapore & Singapore Nature Reserve","surprise",689
+"558","MacRitchie Singapore & Singapore Nature Reserve","trust",1397
+"559","MacRitchie Singapore & Singapore Nature Reserve","negative",793
+"560","MacRitchie Singapore & Singapore Nature Reserve","positive",2480
+"561","HarbourFront, Singapore","anger",30
+"562","HarbourFront, Singapore","anticipation",134
+"563","HarbourFront, Singapore","disgust",8
+"564","HarbourFront, Singapore","fear",50
+"565","HarbourFront, Singapore","joy",116
+"566","HarbourFront, Singapore","sadness",55
+"567","HarbourFront, Singapore","surprise",80
+"568","HarbourFront, Singapore","trust",162
+"569","HarbourFront, Singapore","negative",80
+"570","HarbourFront, Singapore","positive",239
+"571","Bras Basah.Bugis, Singapore Cultural District","anger",289
+"572","Bras Basah.Bugis, Singapore Cultural District","anticipation",1244
+"573","Bras Basah.Bugis, Singapore Cultural District","disgust",200
+"574","Bras Basah.Bugis, Singapore Cultural District","fear",322
+"575","Bras Basah.Bugis, Singapore Cultural District","joy",1485
+"576","Bras Basah.Bugis, Singapore Cultural District","sadness",234
+"577","Bras Basah.Bugis, Singapore Cultural District","surprise",724
+"578","Bras Basah.Bugis, Singapore Cultural District","trust",1675
+"579","Bras Basah.Bugis, Singapore Cultural District","negative",957
+"580","Bras Basah.Bugis, Singapore Cultural District","positive",2721
+"581","Jamae Mosque (Masjid Chulia) Singapore","anger",78
+"582","Jamae Mosque (Masjid Chulia) Singapore","anticipation",51
+"583","Jamae Mosque (Masjid Chulia) Singapore","disgust",8
+"584","Jamae Mosque (Masjid Chulia) Singapore","fear",19
+"585","Jamae Mosque (Masjid Chulia) Singapore","joy",60
+"586","Jamae Mosque (Masjid Chulia) Singapore","sadness",12
+"587","Jamae Mosque (Masjid Chulia) Singapore","surprise",16
+"588","Jamae Mosque (Masjid Chulia) Singapore","trust",82
+"589","Jamae Mosque (Masjid Chulia) Singapore","negative",17
+"590","Jamae Mosque (Masjid Chulia) Singapore","positive",144
+"591","Singapore Flyer","anger",222
+"592","Singapore Flyer","anticipation",1170
+"593","Singapore Flyer","disgust",107
+"594","Singapore Flyer","fear",270
+"595","Singapore Flyer","joy",912
+"596","Singapore Flyer","sadness",282
+"597","Singapore Flyer","surprise",482
+"598","Singapore Flyer","trust",954
+"599","Singapore Flyer","negative",487
+"600","Singapore Flyer","positive",2127
+"601","Marina Barrage","anger",138
+"602","Marina Barrage","anticipation",874
+"603","Marina Barrage","disgust",200
+"604","Marina Barrage","fear",280
+"605","Marina Barrage","joy",867
+"606","Marina Barrage","sadness",155
+"607","Marina Barrage","surprise",394
+"608","Marina Barrage","trust",940
+"609","Marina Barrage","negative",440
+"610","Marina Barrage","positive",2012
+"611","Buddha Tooth Relic Temple & Museum in Singapore","anger",197
+"612","Buddha Tooth Relic Temple & Museum in Singapore","anticipation",1007
+"613","Buddha Tooth Relic Temple & Museum in Singapore","disgust",115
+"614","Buddha Tooth Relic Temple & Museum in Singapore","fear",243
+"615","Buddha Tooth Relic Temple & Museum in Singapore","joy",1373
+"616","Buddha Tooth Relic Temple & Museum in Singapore","sadness",260
+"617","Buddha Tooth Relic Temple & Museum in Singapore","surprise",484
+"618","Buddha Tooth Relic Temple & Museum in Singapore","trust",1490
+"619","Buddha Tooth Relic Temple & Museum in Singapore","negative",458
+"620","Buddha Tooth Relic Temple & Museum in Singapore","positive",3315
+"621","National Gallery Singapore","anger",595
+"622","National Gallery Singapore","anticipation",2496
+"623","National Gallery Singapore","disgust",190
+"624","National Gallery Singapore","fear",630
+"625","National Gallery Singapore","joy",2492
+"626","National Gallery Singapore","sadness",1169
+"627","National Gallery Singapore","surprise",1376
+"628","National Gallery Singapore","trust",1993
+"629","National Gallery Singapore","negative",829
+"630","National Gallery Singapore","positive",5560
+"631","Universal Studios Singapore™ Theme Park","anger",707
+"632","Universal Studios Singapore™ Theme Park","anticipation",2402
+"633","Universal Studios Singapore™ Theme Park","disgust",398
+"634","Universal Studios Singapore™ Theme Park","fear",757
+"635","Universal Studios Singapore™ Theme Park","joy",1876
+"636","Universal Studios Singapore™ Theme Park","sadness",679
+"637","Universal Studios Singapore™ Theme Park","surprise",849
+"638","Universal Studios Singapore™ Theme Park","trust",1799
+"639","Universal Studios Singapore™ Theme Park","negative",1640
+"640","Universal Studios Singapore™ Theme Park","positive",3693
+"641","Singapore Science Centre","anger",387
+"642","Singapore Science Centre","anticipation",1340
+"643","Singapore Science Centre","disgust",200
+"644","Singapore Science Centre","fear",547
+"645","Singapore Science Centre","joy",1194
+"646","Singapore Science Centre","sadness",387
+"647","Singapore Science Centre","surprise",469
+"648","Singapore Science Centre","trust",1304
+"649","Singapore Science Centre","negative",856
+"650","Singapore Science Centre","positive",3021
+"651","Sentosa Island, Singapore: Leisure & Attractions","anger",300
+"652","Sentosa Island, Singapore: Leisure & Attractions","anticipation",1275
+"653","Sentosa Island, Singapore: Leisure & Attractions","disgust",107
+"654","Sentosa Island, Singapore: Leisure & Attractions","fear",223
+"655","Sentosa Island, Singapore: Leisure & Attractions","joy",1309
+"656","Sentosa Island, Singapore: Leisure & Attractions","sadness",279
+"657","Sentosa Island, Singapore: Leisure & Attractions","surprise",638
+"658","Sentosa Island, Singapore: Leisure & Attractions","trust",1231
+"659","Sentosa Island, Singapore: Leisure & Attractions","negative",581
+"660","Sentosa Island, Singapore: Leisure & Attractions","positive",2207
+"661","Chinatown Singapore: History & Culture","anger",216
+"662","Chinatown Singapore: History & Culture","anticipation",892
+"663","Chinatown Singapore: History & Culture","disgust",150
+"664","Chinatown Singapore: History & Culture","fear",249
+"665","Chinatown Singapore: History & Culture","joy",1557
+"666","Chinatown Singapore: History & Culture","sadness",235
+"667","Chinatown Singapore: History & Culture","surprise",434
+"668","Chinatown Singapore: History & Culture","trust",1596
+"669","Chinatown Singapore: History & Culture","negative",559
+"670","Chinatown Singapore: History & Culture","positive",2939
+"671","Singapore Botanic Gardens","anger",257
+"672","Singapore Botanic Gardens","anticipation",1232
+"673","Singapore Botanic Gardens","disgust",124
+"674","Singapore Botanic Gardens","fear",207
+"675","Singapore Botanic Gardens","joy",2211
+"676","Singapore Botanic Gardens","sadness",318
+"677","Singapore Botanic Gardens","surprise",636
+"678","Singapore Botanic Gardens","trust",1389
+"679","Singapore Botanic Gardens","negative",541
+"680","Singapore Botanic Gardens","positive",3658
+"681","Singapore Zoo: Attractions & Things to Do","anger",412
+"682","Singapore Zoo: Attractions & Things to Do","anticipation",1471
+"683","Singapore Zoo: Attractions & Things to Do","disgust",240
+"684","Singapore Zoo: Attractions & Things to Do","fear",482
+"685","Singapore Zoo: Attractions & Things to Do","joy",1494
+"686","Singapore Zoo: Attractions & Things to Do","sadness",430
+"687","Singapore Zoo: Attractions & Things to Do","surprise",578
+"688","Singapore Zoo: Attractions & Things to Do","trust",1571
+"689","Singapore Zoo: Attractions & Things to Do","negative",884
+"690","Singapore Zoo: Attractions & Things to Do","positive",3343
+"691","River Safari Singapore","anger",399
+"692","River Safari Singapore","anticipation",1667
+"693","River Safari Singapore","disgust",281
+"694","River Safari Singapore","fear",504
+"695","River Safari Singapore","joy",1356
+"696","River Safari Singapore","sadness",439
+"697","River Safari Singapore","surprise",650
+"698","River Safari Singapore","trust",1285
+"699","River Safari Singapore","negative",880
+"700","River Safari Singapore","positive",3395
+"701","Cable Car Singapore & Mount Faber","anger",232
+"702","Cable Car Singapore & Mount Faber","anticipation",1074
+"703","Cable Car Singapore & Mount Faber","disgust",120
+"704","Cable Car Singapore & Mount Faber","fear",314
+"705","Cable Car Singapore & Mount Faber","joy",1021
+"706","Cable Car Singapore & Mount Faber","sadness",240
+"707","Cable Car Singapore & Mount Faber","surprise",1476
+"708","Cable Car Singapore & Mount Faber","trust",982
+"709","Cable Car Singapore & Mount Faber","negative",456
+"710","Cable Car Singapore & Mount Faber","positive",2065
+"711","Night Safari, Singapore","anger",609
+"712","Night Safari, Singapore","anticipation",1921
+"713","Night Safari, Singapore","disgust",417
+"714","Night Safari, Singapore","fear",775
+"715","Night Safari, Singapore","joy",1251
+"716","Night Safari, Singapore","sadness",728
+"717","Night Safari, Singapore","surprise",761
+"718","Night Safari, Singapore","trust",1378
+"719","Night Safari, Singapore","negative",1380
+"720","Night Safari, Singapore","positive",3064
+"721","Pulau Ubin & Singapore Islands","anger",24
+"722","Pulau Ubin & Singapore Islands","anticipation",70
+"723","Pulau Ubin & Singapore Islands","disgust",19
+"724","Pulau Ubin & Singapore Islands","fear",38
+"725","Pulau Ubin & Singapore Islands","joy",59
+"726","Pulau Ubin & Singapore Islands","sadness",34
+"727","Pulau Ubin & Singapore Islands","surprise",41
+"728","Pulau Ubin & Singapore Islands","trust",59
+"729","Pulau Ubin & Singapore Islands","negative",65
+"730","Pulau Ubin & Singapore Islands","positive",148
+"731","Little India Singapore: History & Culture","anger",325
+"732","Little India Singapore: History & Culture","anticipation",1131
+"733","Little India Singapore: History & Culture","disgust",313
+"734","Little India Singapore: History & Culture","fear",308
+"735","Little India Singapore: History & Culture","joy",1686
+"736","Little India Singapore: History & Culture","sadness",328
+"737","Little India Singapore: History & Culture","surprise",582
+"738","Little India Singapore: History & Culture","trust",1753
+"739","Little India Singapore: History & Culture","negative",844
+"740","Little India Singapore: History & Culture","positive",3347
+"741","Changi Museum Singapore","anger",841
+"742","Changi Museum Singapore","anticipation",1018
+"743","Changi Museum Singapore","disgust",442
+"744","Changi Museum Singapore","fear",1286
+"745","Changi Museum Singapore","joy",937
+"746","Changi Museum Singapore","sadness",1039
+"747","Changi Museum Singapore","surprise",429
+"748","Changi Museum Singapore","trust",1603
+"749","Changi Museum Singapore","negative",1821
+"750","Changi Museum Singapore","positive",3426
+"751","Chek Jawa","anger",59
+"752","Chek Jawa","anticipation",302
+"753","Chek Jawa","disgust",67
+"754","Chek Jawa","fear",120
+"755","Chek Jawa","joy",240
+"756","Chek Jawa","sadness",88
+"757","Chek Jawa","surprise",173
+"758","Chek Jawa","trust",286
+"759","Chek Jawa","negative",262
+"760","Chek Jawa","positive",599
+"761","Marina Bay Sands® SkyPark","anger",343
+"762","Marina Bay Sands® SkyPark","anticipation",1495
+"763","Marina Bay Sands® SkyPark","disgust",170
+"764","Marina Bay Sands® SkyPark","fear",248
+"765","Marina Bay Sands® SkyPark","joy",1168
+"766","Marina Bay Sands® SkyPark","sadness",361
+"767","Marina Bay Sands® SkyPark","surprise",499
+"768","Marina Bay Sands® SkyPark","trust",1439
+"769","Marina Bay Sands® SkyPark","negative",627
+"770","Marina Bay Sands® SkyPark","positive",3229
+"771","Resorts World Sentosa, Singapore","anger",317
+"772","Resorts World Sentosa, Singapore","anticipation",1354
+"773","Resorts World Sentosa, Singapore","disgust",209
+"774","Resorts World Sentosa, Singapore","fear",386
+"775","Resorts World Sentosa, Singapore","joy",1446
+"776","Resorts World Sentosa, Singapore","sadness",324
+"777","Resorts World Sentosa, Singapore","surprise",665
+"778","Resorts World Sentosa, Singapore","trust",1221
+"779","Resorts World Sentosa, Singapore","negative",749
+"780","Resorts World Sentosa, Singapore","positive",2869
+"781","Sungei Buloh","anger",260
+"782","Sungei Buloh","anticipation",986
+"783","Sungei Buloh","disgust",295
+"784","Sungei Buloh","fear",505
+"785","Sungei Buloh","joy",810
+"786","Sungei Buloh","sadness",271
+"787","Sungei Buloh","surprise",482
+"788","Sungei Buloh","trust",890
+"789","Sungei Buloh","negative",785
+"790","Sungei Buloh","positive",2203
+"791","S.E.A. Aquarium","anger",336
+"792","S.E.A. Aquarium","anticipation",1234
+"793","S.E.A. Aquarium","disgust",272
+"794","S.E.A. Aquarium","fear",477
+"795","S.E.A. Aquarium","joy",1255
+"796","S.E.A. Aquarium","sadness",383
+"797","S.E.A. Aquarium","surprise",581
+"798","S.E.A. Aquarium","trust",1350
+"799","S.E.A. Aquarium","negative",868
+"800","S.E.A. Aquarium","positive",3388
+"801","Singapore River: History & Culture Tours","anger",146
+"802","Singapore River: History & Culture Tours","anticipation",927
+"803","Singapore River: History & Culture Tours","disgust",116
+"804","Singapore River: History & Culture Tours","fear",184
+"805","Singapore River: History & Culture Tours","joy",1121
+"806","Singapore River: History & Culture Tours","sadness",305
+"807","Singapore River: History & Culture Tours","surprise",504
+"808","Singapore River: History & Culture Tours","trust",1052
+"809","Singapore River: History & Culture Tours","negative",335
+"810","Singapore River: History & Culture Tours","positive",2081
+"811","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","anger",24
+"812","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","anticipation",113
+"813","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","disgust",20
+"814","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","fear",43
+"815","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","joy",171
+"816","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","sadness",30
+"817","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","surprise",54
+"818","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","trust",184
+"819","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","negative",60
+"820","Joo Chiat/Katong: Singapore Peranakan Neighbourhood","positive",368
+"821","Marina Bay Singapore: Attractions & Things to do","anger",173
+"822","Marina Bay Singapore: Attractions & Things to do","anticipation",1109
+"823","Marina Bay Singapore: Attractions & Things to do","disgust",76
+"824","Marina Bay Singapore: Attractions & Things to do","fear",214
+"825","Marina Bay Singapore: Attractions & Things to do","joy",1261
+"826","Marina Bay Singapore: Attractions & Things to do","sadness",271
+"827","Marina Bay Singapore: Attractions & Things to do","surprise",572
+"828","Marina Bay Singapore: Attractions & Things to do","trust",1140
+"829","Marina Bay Singapore: Attractions & Things to do","negative",334
+"830","Marina Bay Singapore: Attractions & Things to do","positive",2430
