@@ -1,11 +1,16 @@
 # Libraries
 library(dplyr)
+library(DT)
+library(ggplot2)
 library(leaflet)
 library(osrm)
+library(RColorBrewer)
 library(shiny)
 library(shinydashboard)
+library(tm)
+library(wordcloud)
 
-# Load data
+# Load location data
 attractions <- read.csv("./datasets/tourist attractions/TOURISM.csv", stringsAsFactors = F)
 busstops <- read.csv("./datasets/bus stops/BusStop.csv", stringsAsFactors = F)
 clinics <- read.csv("./datasets/chas clinics/chas-clinics.csv", stringsAsFactors = F)
@@ -17,23 +22,23 @@ stations <- read.csv("./datasets/train stations/MRTLRTstations.csv", stringsAsFa
 taxi_stands <- read.csv("./datasets/taxi stands/TaxiStop.csv", stringsAsFactors = F)
 combined_data <- read.csv("./datasets/combined_data.csv", stringsAsFactors = F)
 
+# Load Tripadvisor review data
+freq_word <- read.csv("./datasets/tripadvisor/ReviewWords.csv", stringsAsFactors = F)
+sentiment <- read.csv("./datasets/tripadvisor/Sentiments.csv", stringsAsFactors = F)
+reviews <- read.csv("./datasets/tripadvisor/Reviews.csv", stringsAsFactors = F)
+
+
 ui <- dashboardPage(
   dashboardHeader(title = "Discover Singapore"),
   
   dashboardSidebar(
     sidebarMenu(
-      menuItem(text = "App Guide", tabName = "guide", icon = icon("info")),
       menuItem(text = "Map View", tabName = "mapview", icon = icon("map")),
       menuItem(text = "Tripadvisor Reviews", tabName = "tripadvisor", icon = icon("binoculars"))
     )
   ),
   
   dashboardBody(
-    tabItem(tabName = "guide"
-      # Application Guide
-      
-    ),
-    
     tabItems(
       # Map view tab
       tabItem(tabName = "mapview",
@@ -64,6 +69,15 @@ ui <- dashboardPage(
           ),
         
           mainPanel(
+            p(strong("Instructions:"), br(),
+              "1. Select one of the options under Transportation, Medical or Tourism to view all", 
+              " available locations within the categories.", br(), 
+              "2. Click on a cluster to have a zoomed in view of the markers within the cluster", br(),
+              "3. Click on a marker to view additional information of the selected location", br(),
+              "4. To view a route between two locations, repeat step 1 and select a Starting Point",
+              " and Destination from the drop down list or type out your desired location", 
+              style = "padding: 5px 20px 0px;"
+            ),
             leafletOutput(outputId = "map"),
             fluidRow(
               column(12, offset = 0, style = "padding: 20px;", uiOutput(outputId = "information"))
@@ -73,13 +87,47 @@ ui <- dashboardPage(
       ),
       
       # Tripadvisor tab
-      tabItem(tabName = "tripadvisor"
+      tabItem(tabName = "tripadvisor",
+        sidebarLayout(
+          position = "right",
+          sidebarPanel(
+            selectInput("selectAttraction", label = h3("Select Attraction"), 
+                        choices = sort(unique(reviews$attraction_name))
+            ),
+            p(strong("Instructions:"), br(),
+              "1. Select the travel attraction in the drop down bar", br(),
+              "2. View the wordcloud to see what others are saying about the place", br(),
+              "3. View the sentiment analysis", br(),
+              "4. View reviews from other users who visited the attraction"
+            )
+          ),
+          mainPanel(
+            tabsetPanel(
+              tabPanel("Sentiments", 
+                       br(),
+                       h4("Visitors' sentiments"),
+                       plotOutput("SentimentAnalysis"),
+              ), 
+              tabPanel("Wordcloud",
+                       br(),
+                       h4("Visitors' Word"),
+                       plotOutput("FreqCloud"),
+              ), 
+              tabPanel("Full Review", 
+                       br(),
+                       h4("Visitors' Review"),
+                       dataTableOutput("ReviewsTable")
+              )
+            )
+          )
+        )
       )
     )
   )
 )
 
 server <- function(input, output){
+  # Map view tab
   # Filters combined data frame by checkbox selection
   filtered_data <- reactive({
     viewOptions <- c(input$transportOptions, input$medicalOptions, input$touristOptions)
@@ -229,9 +277,11 @@ server <- function(input, output){
         },
         taxi = {
           # Case when a taxi stand is selected
-          p(strong("Type: "), selected_row[2], br(),
-            strong("Longitude: "), selected_row[3], br(),
-            strong("Latitude: "), selected_row[4]
+          p(strong("Name: "), selected_row[2], br(),
+            strong("Type: "), selected_row[3], br(),
+            strong("Longitude: "), selected_row[4], br(),
+            strong("Latitude: "), selected_row[5], br(),
+            strong("Address: "), selected_row[6]
           )
         },
         clinic = {
@@ -294,12 +344,47 @@ server <- function(input, output){
           )
         },
         {
-          p("Select one of the options (Transportation, Medical and Tourism) and click on a marker ",
-            "to view additional information.")
+          
         }
       )
     })
   })
+  
+  # Tripadvisor Tab
+  # Sentiment Analysis
+  sentiment_df <- reactive({
+    sentiment_df1 <- sentiment[sentiment$attraction_name == input$selectAttraction,]
+    sentiment_df1
+  })
+  
+  output$SentimentAnalysis <- renderPlot(
+    ggplot(data=sentiment_df(), aes(x = sentiment, y = score)) +
+      geom_bar(aes(fill = sentiment),stat = "identity") +
+      theme(legend.position = "none") +
+      xlab("Sentiments") + ylab("Scores")+
+      theme_minimal()
+  )
+  
+  # Wordcloud
+  wordcloud_df <- reactive({
+    wordcloud_df1 <- freq_word[freq_word$attraction_name == input$selectAttraction,]$word
+    wordcloud_df1
+  })
+  
+  output$FreqCloud <- renderPlot(
+    wordcloud(wordcloud_df(), min.freq = 5, scale=c(4.5, .5), random.order = FALSE, rot.per = 0.35, 
+              max.words = 200, colors = brewer.pal(8, "Dark2")))
+  
+  #Reviews Table
+  reviews_df <- reactive({
+    reviews_df1 <- reviews[reviews$attraction_name == input$selectAttraction,] %>% select(3,4)
+    names(reviews_df1) <- c("Reviews","Review Date")
+    reviews_df1
+  })
+  
+  output$ReviewsTable <- DT::renderDataTable(
+    DT::datatable(reviews_df(), options = list(searching = FALSE),rownames= FALSE),
+  )
 }
 
 shinyApp(ui = ui, server = server)
