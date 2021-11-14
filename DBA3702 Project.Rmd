@@ -170,21 +170,64 @@ historic_sites_clean[, c("LONGITUDE", "LATITUDE")] <- historic_sites@coords[, 1:
 write.csv(historic_sites_clean, "./datasets/historic sites/historic-sites.csv")
 ```
 
-### Hospitals
+#### [Hospitals](https://www.healthhub.sg/directory/hospitals)
 ```{r}
 website <- "https://www.healthhub.sg/directory/hospitals"
 
 # Create and launch remote driver
-driver <- rsDriver(browser = "chrome", port = 4001L) 
+rD <- rsDriver(browser="firefox",port=2342L)
 remoteDriver <- driver[["client"]]
-#remoteDriver$open()
 
-# Navigating remote driver to url
-remoteDriver$navigate(website)
+#go to https://www.healthhub.sg/directory/hospitals using the popup browser before running this code
+scrap1 <- read_html(remDr$getPageSource()[[1]]) 
+
+#click on the second page of the hospital directory before running this code
+scrap2 <- read_html(remDr$getPageSource()[[1]]) 
 
 # Close the driver and server
-driver$close()
-remoteDriver[["server"]]$stop()
+remDr$close()
+rD$server$stop()
+
+# Extracting hospital name & address + data cleaning
+hospital1 <- scrap1 %>% html_nodes(".app_ment") 
+hospital2 <- scrap2 %>% html_nodes(".app_ment")
+
+hospital1 <- gsub('<span class=\"app_ment\">\n                            ', "", hospital1)
+hospital1 <- gsub('</span>\n                        </span>', "", hospital1)
+hospital1 <- gsub("<br><span class=\"add_sign\">", "~", hospital1)
+hospital1 <- unlist(hospital1)
+hospital1 <- as.data.frame(hospital1)
+
+hospital2 <- gsub('<span class=\"app_ment\">\n                            ', "", hospital2)
+hospital2 <- gsub('</span>\n                        </span>',"", hospital2)
+hospital2 <- gsub("<br><span class=\"add_sign\">", "~", hospital2)
+hospital2 <- unlist(hospital2)
+hospital2 <- as.data.frame(hospital2)
+
+# Merging data from two different pages into one
+names(hospital1) <- "hospital"
+names(hospital2) <- "hospital"
+hospital <- rbind(hospital1, hospital2)
+hospital <- tidyr::separate(hospital, col="hospital",into = c("Name","Address"),sep = "~")
+hospital$Address <- gsub('&amp;22', "", hospital$Address)
+hospital$Address <- gsub(' - ', "", hospital$Address)
+
+# Extracting telephone & latlong data
+page1 <-(html_attr(html_nodes(scrap1, "a"), "href"))
+page2 <-(html_attr(html_nodes(scrap2, "a"), "href"))
+
+tel <- c(unlist(page1[grepl("tel:",page1)]),unlist(page2[grepl("tel:", page2)]))
+latlong <- c(unlist(page1[grepl("https://www.google.com.sg/maps", page1)]), 
+             unlist(page2[grepl("https://www.google.com.sg/maps", page2)]))
+
+# Combining tel and latlon into hospital df
+hospital <- hospital %>% mutate(Tel = tel) %>% mutate(latlon = latlong) 
+
+hospital$Tel <- gsub('tel:', "", hospital$Tel)
+hospital$latlon <- substr(hospital$latlon, 34, nchar(hospital$latlon))
+hospital <- tidyr::separate(hospital,col = "latlon", into = c("lat", "lon"), sep = ",")
+
+write.csv(hospital,"./datasets/hospital_data.csv", row.names = FALSE)
 ```
 
 ### [Hotels](https://data.gov.sg/dataset/hotels)
