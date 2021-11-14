@@ -1,6 +1,8 @@
 ---
-title: "DBA3702 Project"
-author: "Png Zheng Jie, Sebastian"
+title: "Discover Singapore Data Wrangling"
+author: 
+- Sebastian Png
+- Ang Hao Wen
 date: "Last Edited: 14 Nov 2021"
 output:
   html_document:
