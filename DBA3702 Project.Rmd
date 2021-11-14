@@ -251,6 +251,9 @@ taxi_stands_clean <- taxi_stands_clean %>% rowwise() %>%
 # Extract address without postal code as name
 taxi_stands_clean$Name <- sub(",.+", "", taxi_stands_clean$Address)
 
+# Remove duplicated taxi stands
+taxi_stands_clean <- taxi_stands_clean[!duplicated(taxi_stands_clean$Name), ]
+
 # Reorder data frame columns
 taxi_stands_clean <- taxi_stands_clean[, c(1, 6, 2:5)]
 
