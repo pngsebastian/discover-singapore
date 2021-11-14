@@ -17,7 +17,7 @@ knitr::opts_chunk$set(warning = F, message = F)
 ### Libraries
 ```{r}
 library(dplyr)     # %>%
-library(ggmap)     # geocode
+library(ggmap)     # geocode, revgeocode
 library(leaflet)
 library(proj4)     # project
 library(rgdal)     # readOGR
@@ -230,7 +230,9 @@ taxi_stands <- readOGR(dsn ="./datasets/taxi stands/TaxiStop.shp", verbose = F)
 taxi_stands_clean <- taxi_stands@data
 
 # Add coordinates to the data frame
-taxi_stands_clean[, c("Longitude", "Latitude")] <- project(taxi_stands@coords, taxi_stands@proj4string@projargs, inverse = T)
+taxi_stands_clean[, c("Longitude", "Latitude")] <- project(taxi_stands@coords, 
+                                                           taxi_stands@proj4string@projargs, 
+                                                           inverse = T)
 
 # Remove NA columns and rows
 taxi_stands_clean <- taxi_stands_clean %>% select(-1) %>% na.omit()
@@ -241,6 +243,16 @@ taxi_stands_clean <- rename(taxi_stands_clean, Type = TYPE_CD_DE)
 # Replace taxi stand type with camel case format
 taxi_stands_clean$Type <- taxi_stands_clean$Type %>% 
   tolower() %>% gsub("(?:\\b)(\\w)", "\\U\\1", ., perl = T)
+
+# Retrieve full address from coordinates
+taxi_stands_clean <- taxi_stands_clean %>% rowwise() %>% 
+  mutate(Address = revgeocode(c(Longitude, Latitude)))
+
+# Extract address without postal code as name
+taxi_stands_clean$Name <- sub(",.+", "", taxi_stands_clean$Address)
+
+# Reorder data frame columns
+taxi_stands_clean <- taxi_stands_clean[, c(1, 6, 2:5)]
 
 # Write data frame into a csv file
 write.csv(taxi_stands_clean, "./datasets/taxi stands/TaxiStop.csv")
@@ -340,7 +352,7 @@ start = 0
 # Combines all data frames into one, add row id and group and export as csv file
 list(busstops[, c("LOC_DESC", "LONGITUDE", "LATITUDE", "X")],
      stations[, c("STN_NAME", "LONGITUDE", "LATITUDE", "X")],
-     taxi_stands[, c("Type", "Longitude", "Latitude", "X")],
+     taxi_stands[, c("Name", "Longitude", "Latitude", "X")],
      clinics[, c("HCI_NAME", "LONGITUDE", "LATITUDE", "X")],
      hospitals[, c("Name", "lon", "lat", "X")],
      hawker_centres[, c("NAME", "LONGITUDE", "LATITUDE", "X")],
